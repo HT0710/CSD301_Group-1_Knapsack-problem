@@ -1,0 +1,21 @@
+Ý tưởng:
+Trong bài toán cái túi không có giới hạn số lượng item.
+Cho trước một item thứ i có khối lượng là W_i, giá trị là P_i. Nếu như ta tìm được 1 hoặc một nhóm các item là J sao cho: 
+W_j <= k.W_i và P_j >= k.P_i (k là số nguyên dương) thì ta nói là J thống trị (dominance) i.
+Và khi đó ta có thể loại bỏ i ra khỏi tập item. 
+
+* Còn trong bài toán giới hạn số lượng item thì khi dùng hết tập J thì ta có thể dùng lại item i nên ta không thể bỏ i ra khỏi tập gốc được.
+Từ định nghĩa ở trên người ta chia thành 4 loại:
++ Collective dominance:
+	khi k = 1, tức là W_j < W_i và P_j > P_i
+Thực chất là giải bài toán con của bài toán Knapsack, là tìm tập J sao cho tổng khối lượng nhỏ hơn W_i và tổng giá trị lớn hơn P_i. Dùng phương pháp chương trình động để giải quyết.
++ Threshold dominance
+	Này là bài toán tổng quát của cái trên, với k là số nguyên dương. Ta sẽ cố gắng tìm k nhỏ nhất thỏa mãn điều kiện, thì (k - 1).W_i gọi là ngưỡng của item i, tức là chỉ có tối đa k-1 item i được bỏ vào
++ Multiple dominance
+	Thay vì tìm tập J thì người ta chỉ tìm 1 item j nào đó thôi, và k trong trường hợp này là k = 1. Mục đích là để việc triển khai đơn giản hơn.
++Modular dominance
+	Người ta lập tỉ lệ p/w, chọn thằng tốt nhất (best) gọi là w_b và p_b. Thì J thống tri i khi mà thêm vào một vài item best trong J sẽ khiến cho J "tốt" hơn i. Cụ thể là:
+	w_j + t.w_b <= w_i và p_j + t.p_b >= p_i
+Thì tập J trong trường hợp này là J = {b, j} và k = 1
+
+Đây chỉ là ý tưởng để giảm số item nhằm giảm số lượng tính toán. Thuật toán chính vẫn là dùng chương trình động hoặc thuật toán tham lam
