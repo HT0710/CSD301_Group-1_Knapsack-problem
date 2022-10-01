@@ -5,9 +5,7 @@
 - Thường được sử dụng cho các bài toán NP-khó, hoặc các bài toán có thuật toán đa thức nhưng quá chậm cho dữ liệu lớn.
 
 #### *[# Bài toán NP-khó](https://vi.wikipedia.org/wiki/NP-kh%C3%B3)*
-NP-khó là một tập hợp các bài toán trong lý thuyết độ phức tạp tính toán "ít nhất là khó ngang bất kì bài toán nào trong NP".
-
-(NP: độ phức tạp)
+Là một tập hợp các bài toán trong lý thuyết độ phức tạp tính toán "ít nhất là khó ngang bất kì bài toán nào trong NP". (NP: độ phức tạp)
 
 ## About Algorithm 
 Từ góc độ tính xấp xỉ, các bài toán NP-khó có độ khó rất khác nhau.
