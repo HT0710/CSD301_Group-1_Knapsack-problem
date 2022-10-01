@@ -10,7 +10,9 @@ NP-khó là một tập hợp các bài toán trong lý thuyết độ phức t�
 
 ## About Algorithm 
 Từ góc độ tính xấp xỉ, các bài toán NP-khó có độ khó rất khác nhau.
+
 Có những bài toán như **[knapsack](https://vi.wikipedia.org/wiki/B%C3%A0i_to%C3%A1n_x%E1%BA%BFp_ba_l%C3%B4)** có thuật toán xấp xỉ với bất kì tỉ lệ nào lớn hơn 1.
+
 Có những bài toán khác như **[clique](https://vi.wikipedia.org/wiki/Clique)** không thể tính xấp xỉ với tỉ lệ $a^{1-ε}$ với mọi ε > 0 trừ phi một giả thuyết phổ biến trong lý thuyết độ phức tạp tính toán là sai.
 
 ## Features
