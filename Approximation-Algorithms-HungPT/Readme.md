@@ -35,16 +35,16 @@ Nếu một thuật toán đạt đến tỷ lệ xấp xỉ P(n), thì chúng t
 
 ## Some examples of the Approximation algorithm
 #### 1. [The Vertex Cover Problem](https://www.geeksforgeeks.org/vertex-cover-problem-set-1-introduction-approximate-algorithm-2/)
-- Trong bài toán này, bài toán tối ưu là tìm vertex cover có ít đỉnh nhất.
+Trong bài toán này, bài toán tối ưu là tìm vertex cover có ít đỉnh nhất.
 
 #### 2. [Travelling Salesman Problem](https://www.geeksforgeeks.org/traveling-salesman-problem-tsp-implementation/)
-- Trong bài toán này, bài toán tối ưu hóa là tìm chu trình ngắn nhất.
+Trong bài toán này, bài toán tối ưu hóa là tìm chu trình ngắn nhất.
 
 #### 3. [The Set Covering Problem](https://www.geeksforgeeks.org/set-cover-problem-set-1-greedy-approximate-algorithm/)
-- Đây là một bài toán tối ưu hóa mô hình hóa nhiều bài toán yêu cầu tài nguyên được phân bổ. Ở đây, một tỷ lệ xấp xỉ logarit được sử dụng.
+Đây là một bài toán tối ưu hóa mô hình hóa nhiều bài toán yêu cầu tài nguyên được phân bổ. Ở đây, một tỷ lệ xấp xỉ logarit được sử dụng.
 
 #### 4. [The Subset Sum Problem](https://www.geeksforgeeks.org/subset-sum-problem-dp-25/)
-- Trong bài toán Tổng tập con, bài toán tối ưu hóa là tìm một tập con gồm ${x^1, x^2, x^3… x^n}$ có tổng càng lớn càng tốt nhưng không lớn hơn giá trị đích t.
+Trong bài toán Tổng tập con, bài toán tối ưu hóa là tìm một tập con gồm ${x^1, x^2, x^3… x^n}$ có tổng càng lớn càng tốt nhưng không lớn hơn giá trị đích t.
 
 ## Algorithm design techniques
 Hiện nay, đã có một số kỹ thuật được thiết lập để thiết kế các thuật toán xấp xỉ, bao gồm:
