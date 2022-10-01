@@ -25,7 +25,7 @@ Tùy thuộc vào vấn đề, chúng tôi có thể xác định một giải p
 
 Thuật toán cho một bài toán có tỷ lệ thích hợp là P(n) nếu với bất kì kích thước đầu vào n nào, chi phí C của giải pháp tạo ra bởi thuật toán nằm trong hệ số P(n) của chi phí C* của một giải pháp tối ưu như sau:
 ```
-max(C/C*,C*/C)<=P(n)
+max(C/C*,C*/C) <= P(n)
 ```
 
 ### Case 2:
