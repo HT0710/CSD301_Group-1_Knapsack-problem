@@ -1,6 +1,5 @@
 <h1 align="center">Approximation Algorithms</h1>
 
-## Define
 - Thuật toán xấp xỉ là các thuật toán tìm lời giải xấp xỉ cho các bài toán tối ưu hóa.
 - Kỹ thuật này không đảm bảo giải pháp tốt nhất. Mục tiêu của thuật toán xấp xỉ là đến gần nhất có thể với giải pháp tối ưu trong thời gian đa thức.
 - Thường được sử dụng cho các bài toán NP-khó, hoặc các bài toán có thuật toán đa thức nhưng quá chậm cho dữ liệu lớn.
