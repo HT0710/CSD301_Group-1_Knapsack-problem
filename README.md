@@ -4,7 +4,7 @@
 - Tạo một file <tên thuật toán>.py bên trong folder Algorithms
     + Ví dụ: Mình muốn đóng góp thêm cách giải bài toán Knapsack bằng thuật toán Dynamic Programing cơ bản thì mình sẽ tạo một file mới có tên là Dynamic-Programing-Basic.py bên trong folder Algorithms
 - Tạo một class có tên cùng tên với file vừa tạo
-- Trong class phải có một hàm public tên là findSolution(C, W, P). Với:
+- Trong class phải có một hàm static public tên là findSolution(C, W, P). Với:
   - C : int là khối lượng tối đa của túi.
   - W : List[int] là danh sách khối lượng các item.
   - P : List[int] là danh sách giá trị các item tương ứng với W
