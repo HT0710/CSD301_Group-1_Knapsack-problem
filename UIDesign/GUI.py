@@ -50,7 +50,19 @@ class GUI(Ui_mainwindow):
 
     # Button solve clicked
     def btn_solve_clicked(self, checked) -> None:
-        print(checked)
+        import sys
+        import os
+
+        SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+        sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+        from Algorithms.DynamicPrograming import DynamicPrograming #.Algorithms.DynamicPrograming import DynamicPrograming
+
+        data = self.exportInputToJson()
+        C = data["maximum weight"]
+        W = data["table"]["Weight"]
+        P = data["table"]["Price"]
+        print(DynamicPrograming.findSolution(C, W, P))
 
     # Add new row to input table and focus last row
     def btn_addInput_clicked(self, checked) -> None:
@@ -186,9 +198,9 @@ class GUI(Ui_mainwindow):
             "maximum weight", self.spb_maximumWeight.value)
         self.spb_maximumWeight.setValue(maxWeight)
         table: dict = jsonData.get("table", {})
-        weights: list = table.get("weights", [])
-        values: list = table.get("values", [])
-        quantities: list = table.get("quantities", [])
+        weights: list = table.get("Weight", [])
+        values: list = table.get("Price", [])
+        quantities: list = table.get("Quantity", [])
         columns : dict = self.getColumnIndex()
         tableRow = self.tb_input.rowCount()
         self.tb_input.setRowCount(

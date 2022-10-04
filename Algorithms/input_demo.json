@@ -1,0 +1,9 @@
+{
+  "algorithm": "Dynamic Programing",
+  "maximum weight": 50,
+  "table": {
+    "Weight": [10, 20, 30],
+    "Price": [50, 100, 120],
+    "Quantity": [1, 1, 1]
+  }
+}
