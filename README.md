@@ -13,7 +13,7 @@
 - Nên thể đánh dấu lại kiểu dữ liệu của biến để người khác dễ đọc (nếu không thích thì thôi, nhưng khuyến khích nên để kiểu dữ liệu cho dễ đọc).
 - <b>QUAN TRỌNG:</b> Phải comment code, tối thiểu là ở mức độ function (tức là comment function đó có tác dụng gì, các biến đầu vào và đầu ra có ý nghĩa gì). 
 
-Các bạn xem code mẫu [ở đây](./CodingGuideExample/main.py)
+Các bạn xem code mẫu [ở đây](./Algorithms/CodingGuideExample.py)
 
 Mục đích của việc này là:
 - Ta chia code frontend và backend độc lập với nhau.
