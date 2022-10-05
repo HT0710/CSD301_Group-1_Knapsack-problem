@@ -1,4 +1,6 @@
 import json
+from random import random
+from statistics import quantiles
 from time import time
 from UI_mainwindow import Ui_mainwindow
 from PyQt5 import QtWidgets, QtCore
@@ -21,6 +23,7 @@ class GUI(Ui_mainwindow):
         self.btn_addInput.clicked.connect(self.btn_addInput_clicked)
         self.btn_deleteInput.clicked.connect(self.btn_deleteInput_clicked)
         self.btn_exportInput.clicked.connect(self.btn_exportInput_clicked)
+        self.btn_randomInput.clicked.connect(self.btn_randomInput_clicked)
 
         # Actions in Menu File
         self.actionImportDataToExist.triggered.connect(
@@ -59,6 +62,7 @@ class GUI(Ui_mainwindow):
 
         from Algorithms.DynamicPrograming import DynamicPrograming 
         from Algorithms.Greedy import GreedyProgram
+        from Algorithms.Backtrack import Backtrack
 
         data = self.exportInputToJson()
         C = data["maximum weight"]
@@ -70,10 +74,16 @@ class GUI(Ui_mainwindow):
             t1 = time()
             indexes = DynamicPrograming.findSolution(C, W, P)
             t2 = time()
-        elif self.cbb_algorithm.currentText() == "Greedy Algorithm":
+        elif self.cbb_algorithm.currentText() == "Greedy":
             t1 = time()
             indexes = GreedyProgram.findSolution(C, W, P)
             t2 = time()
+        elif self.cbb_algorithm.currentText() == "Backtrack":
+            t1 = time()
+            indexes = Backtrack(W, P).findSolution(C)
+            t2 = time()
+        else:
+            return
     
         self.addDataToOutputTable({
             "table" : {
@@ -83,7 +93,7 @@ class GUI(Ui_mainwindow):
             }
         })
 
-        self.lb_time.setText("Time: {} ms".format(t2 - t1))
+        self.lb_time.setText("Time: {} s".format(t2 - t1))
 
     # Add new row to input table and focus last row
     def btn_addInput_clicked(self, checked) -> None:
@@ -112,6 +122,20 @@ class GUI(Ui_mainwindow):
             except:
                 self.showMessageBox(
                     message="Error when export input data!", boxType=QMessageBox.critical)
+
+    def btn_randomInput_clicked(self, checked) -> None:
+        max_weights = self.spb_maximumWeight.value()
+        weights = [ int(random() * max_weights + 1) for i in range(max_weights)]
+        price = [ int(random() * max_weights + 1) for i in range(max_weights)]
+        quantities = [1] * max_weights
+        self.addDataToInputTable({
+            "table" : {
+                "Weight" : weights,
+                "Price" : price,
+                "Quantity" : quantities
+            }
+        })
+
 
     '''
     ---- Actions in File Menu ----
@@ -212,11 +236,11 @@ class GUI(Ui_mainwindow):
         return jsonData
 
     # Add data to combobox algorithm, spinbox maximum weight and input table
-    def addDataToInputTable(self, jsonData: str) -> None:
+    def addDataToInputTable(self, jsonData: dict) -> None:
         algorithm = jsonData.get("algorithm", self.cbb_algorithm.currentText())
         self.cbb_algorithm.setCurrentText(algorithm)
         maxWeight = jsonData.get(
-            "maximum weight", self.spb_maximumWeight.value)
+            "maximum weight", self.spb_maximumWeight.value())
         self.spb_maximumWeight.setValue(maxWeight)
         table: dict = jsonData.get("table", {})
         weights: list = table.get("Weight", [])
@@ -252,6 +276,7 @@ class GUI(Ui_mainwindow):
         for i in range(len(quantities)):
             self.tb_output.setItem(i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
 
+        self.tb_output.setVerticalHeaderLabels([str(x + 1) for x in range(self.tb_output.rowCount())])
         self.tb_output.setVerticalHeaderItem(self.tb_output.rowCount() - 1, QtWidgets.QTableWidgetItem("Total"))
         self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Weight"], QtWidgets.QTableWidgetItem(str(sum(weights))))
         self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
