@@ -1,9 +1,11 @@
+
 #Initializing the Items class with data variables - weight and value
 from typing import List
 
 class GreedyProgram:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
+        n = len(W)
         WP = [P[i]/W[i] for i in range(len(W))]
         indexes = [x for x in range(n)]
         for i in range(0, n - 1):
@@ -26,4 +28,3 @@ class GreedyProgram:
             return result
         return print(Function(C, W, P))
 
-        
