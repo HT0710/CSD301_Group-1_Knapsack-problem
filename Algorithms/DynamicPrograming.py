@@ -5,10 +5,6 @@ class DynamicPrograming:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
         n = len(W)
-
-        if sum(W) <= C:
-            return [x for x in range(n)]
-        
         dp = [0] * (C+1)  # Making the dp array
         di = [-1] * (C+1)
 
@@ -22,12 +18,8 @@ class DynamicPrograming:
                         di[w] = i - 1
                         dp[w] = dp[w - W[i-1]]+P[i-1]
         result = []
-        selected = []
-        print(di)
         i = C
-        while i > 0 and not di[i] in selected:
+        while i > 0:
             result = [di[i]] + result
-            selected.append(di[i])
             i -= W[di[i]] 
-
         return result  # returning the maximum value of knapsack

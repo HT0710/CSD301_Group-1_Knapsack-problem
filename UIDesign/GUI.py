@@ -1,5 +1,4 @@
 import json
-from time import time
 from UI_mainwindow import Ui_mainwindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QFileDialog, QWidget, QTableWidgetItem, QMessageBox
@@ -57,31 +56,13 @@ class GUI(Ui_mainwindow):
         SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
         sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-        from Algorithms.DynamicPrograming import DynamicPrograming 
-        from Algorithms.Greedy import Greedy
+        from Algorithms.DynamicPrograming import DynamicPrograming #.Algorithms.DynamicPrograming import DynamicPrograming
 
         data = self.exportInputToJson()
         C = data["maximum weight"]
         W = data["table"]["Weight"]
         P = data["table"]["Price"]
-        indexes = []
-
-        if self.cbb_algorithm.currentText() == "Dynamic Programing":
-            t1 = time()
-            indexes = DynamicPrograming.findSolution(C, W, P)
-            t2 = time()
-        elif self.cbb_algorithm.currentText() == "Greedy":
-            indexes = Greedy.findSolution(C, W, P)
-    
-        self.addDataToOutputTable({
-            "table" : {
-                "Weight" : [W[x] for x in indexes],
-                "Price" : [P[x] for x in indexes],
-                "Quantity" : [1] * len(indexes)
-            }
-        })
-
-        self.lb_time.setText("Time: {} ms".format(t2 - t1))
+        print(DynamicPrograming.findSolution(C, W, P))
 
     # Add new row to input table and focus last row
     def btn_addInput_clicked(self, checked) -> None:
@@ -233,27 +214,13 @@ class GUI(Ui_mainwindow):
         for i in range(len(quantities)):
             self.tb_input.setItem(
                 tableRow + i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
-
-    # Add data to combobox algorithm, spinbox maximum weight and input table
-    def addDataToOutputTable(self, jsonData: dict) -> None:
-        table: dict = jsonData.get("table", {})
-        weights: list = table.get("Weight", [])
-        values: list = table.get("Price", [])
-        quantities: list = table.get("Quantity", [])
-        columns : dict = self.getColumnIndex()
-        
-        self.tb_output.setRowCount(max(len(weights), max(len(values), len(quantities))) + 1)
-        for i in range(len(weights)):
-            self.tb_output.setItem(i, columns["Weight"], QtWidgets.QTableWidgetItem(str(weights[i])))
-        for i in range(len(values)):
-            self.tb_output.setItem(i, columns["Price"], QtWidgets.QTableWidgetItem(str(values[i])))
-        for i in range(len(quantities)):
-            self.tb_output.setItem(i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
-
-        self.tb_output.setVerticalHeaderItem(self.tb_output.rowCount() - 1, QtWidgets.QTableWidgetItem("Total"))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Weight"], QtWidgets.QTableWidgetItem(str(sum(weights))))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Quantity"], QtWidgets.QTableWidgetItem(str(sum(quantities))))
+        # if table:
+        #     tableRow = self.tb_input.rowCount()
+        #     for row in range(len(table)):
+        #         self.tb_input.insertRow(self.tb_input.rowCount())
+        #         for col in range(len(table[row])):
+        #             self.tb_input.setItem(
+        #                 tableRow + row, col, QTableWidgetItem(str(table[row][col])))
 
     # Create dialog or message Widget
     def modalWidget(self, width: int = 400, height: int = 100) -> QWidget:

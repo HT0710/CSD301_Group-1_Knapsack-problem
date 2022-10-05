@@ -1,5 +1,0 @@
-# Convert resource file to py file
-pyrcc5 /home/nghiatnh/Pictures/resource.qrc -o resource_rc.py
-
-# Convert ui file to py file
-pyuic5 -x ../PyQt5/mainwindow.ui -o UI_mainwindow.py   
