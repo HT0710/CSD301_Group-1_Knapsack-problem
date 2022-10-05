@@ -4,14 +4,14 @@ class Backtrack:
         self.__P = P
 
     def findSolution(self, C: int):
-        result = self.__knapSack(C)
-
-        return result[1]
-
-    def __knapSack(self, mW: int):
         w = self.__W
         v = self.__P
         n = len(self.__P)
+        result = self.__knapSack(C, w, v, n)
+
+        return result[1]
+
+    def __knapSack(self, mW: int, w, v, n):
 
         if (mW == 0 or n == 0):
             return [0, []]
