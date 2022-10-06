@@ -17,7 +17,6 @@ class GreedyProgram:
                 usedCapacity += W[indexes[i]]
                 totalValue += P[indexes[i]]
                 result.append(indexes[i])
-            else:
-                break
+
         return result
 
