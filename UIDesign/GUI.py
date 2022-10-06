@@ -1,3 +1,4 @@
+from concurrent.futures import thread
 import json
 from random import random
 from statistics import quantiles
@@ -79,8 +80,8 @@ class GUI(Ui_mainwindow):
             elif self.cbb_algorithm.currentText() == "Backtrack":
                 algorithm = algorithms.Backtrack
             else:
-                return
-            
+                raise Exception("Can not find the algorithm!")
+
             t1 = time()
             indexes = algorithm.findSolution(C, W, P)
             t2 = time()
@@ -94,7 +95,9 @@ class GUI(Ui_mainwindow):
             })
 
             self.lb_time.setText("Time: {} s".format(t2 - t1))
+            self.lb_status.setText("Status: completed!")
         except Exception as e:
+            self.lb_status.setText("Status: error!")
             self.showMessageBox("Error", QMessageBox.critical,str(e))
 
     # Add new row to input table and focus last row

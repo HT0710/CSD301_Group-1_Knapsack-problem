@@ -456,17 +456,17 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Time: 125ms</string>
+          <string>Time: 0.125 s</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="lb_space">
+        <widget class="QLabel" name="lb_status">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Space: </string>
+          <string>Status: completed</string>
          </property>
         </widget>
        </item>
