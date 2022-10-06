@@ -1,11 +1,13 @@
 from concurrent.futures import thread
 import json
+import math
 from random import random
 from statistics import quantiles
 from time import time
 from UI_mainwindow import Ui_mainwindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QFileDialog, QWidget, QTableWidgetItem, QMessageBox
+
 
 class GUI(Ui_mainwindow):
 
@@ -58,7 +60,7 @@ class GUI(Ui_mainwindow):
         import os
         SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
         sys.path.append(os.path.dirname(SCRIPT_DIR))
-        
+
         import Algorithms.Algorithms as algorithms
 
         algorithm = None
@@ -69,29 +71,31 @@ class GUI(Ui_mainwindow):
             P = data["table"]["Price"]
             indexes = []
         except:
-            self.showMessageBox("Error", QMessageBox.critical,"Error when read input!")
+            self.showMessageBox("Error", QMessageBox.critical,
+                                "Error when read input!")
             return
         try:
-            if self.cbb_algorithm.currentText() == "Dynamic Programing":
-                algorithm = algorithms.DynamicPrograming
-            elif self.cbb_algorithm.currentText() == "Greedy":
-                algorithm = algorithms.GreedyProgram
-            elif self.cbb_algorithm.currentText() == "Backtrack":
-                algorithm = algorithms.Backtrack
-            elif self.cbb_algorithm.currentText() == "Branch and Bound":
-                algorithm = algorithms.BranchAndBound
-            else:
-                raise Exception("Can not find the algorithm!")
+            match self.cbb_algorithm.currentText():
+                case "Dynamic Programing":
+                    algorithm = algorithms.DynamicPrograming
+                case "Greedy":
+                    algorithm = algorithms.GreedyProgram
+                case "Backtrack":
+                    algorithm = algorithms.Backtrack
+                case "Branch and Bound":
+                    algorithm = algorithms.BranchAndBound
+                case _:
+                    raise Exception("Can not find the algorithm!")
 
             t1 = time()
             indexes = algorithm.findSolution(C, W, P)
             t2 = time()
-        
+
             self.addDataToOutputTable({
-                "table" : {
-                    "Weight" : [W[x] for x in indexes],
-                    "Price" : [P[x] for x in indexes],
-                    "Quantity" : [1] * len(indexes)
+                "table": {
+                    "Weight": [W[x] for x in indexes],
+                    "Price": [P[x] for x in indexes],
+                    "Quantity": [1] * len(indexes)
                 }
             })
 
@@ -99,7 +103,7 @@ class GUI(Ui_mainwindow):
             self.lb_status.setText("Status: completed!")
         except Exception as e:
             self.lb_status.setText("Status: error!")
-            self.showMessageBox("Error", QMessageBox.critical,str(e))
+            self.showMessageBox("Error", QMessageBox.critical, str(e))
 
     # Add new row to input table and focus last row
     def btn_addInput_clicked(self, checked) -> None:
@@ -131,17 +135,16 @@ class GUI(Ui_mainwindow):
 
     def btn_randomInput_clicked(self, checked) -> None:
         max_weights = self.spb_maximumWeight.value()
-        weights = [ int(random() * max_weights + 1) for i in range(max_weights)]
-        price = [ int(random() * max_weights + 1) for i in range(max_weights)]
+        weights = [int(random() * max_weights + 1) for i in range(max_weights)]
+        price = [int(random() * max_weights + 1) for i in range(max_weights)]
         quantities = [1] * max_weights
         self.addDataToInputTable({
-            "table" : {
-                "Weight" : weights,
-                "Price" : price,
-                "Quantity" : quantities
+            "table": {
+                "Weight": weights,
+                "Price": price,
+                "Quantity": quantities
             }
         })
-
 
     '''
     ---- Actions in File Menu ----
@@ -233,11 +236,12 @@ class GUI(Ui_mainwindow):
     # Convert data from combobox algorithm, spinbox maximum weight and input table to JSON string
     def exportInputToJson(self) -> dict:
         columns = self.getColumnIndex()
-        jsonData = dict() 
+        jsonData = dict()
         jsonData["algorithm"] = self.cbb_algorithm.currentText()
         jsonData["maximum weight"] = self.spb_maximumWeight.value()
         for key in columns:
-            columns[key] = [int(self.tb_input.item(i, columns[key]).text()) for i in range(self.tb_input.rowCount())]
+            columns[key] = [int(self.tb_input.item(i, columns[key]).text())
+                            for i in range(self.tb_input.rowCount())]
         jsonData["table"] = columns
         return jsonData
 
@@ -252,7 +256,7 @@ class GUI(Ui_mainwindow):
         weights: list = table.get("Weight", [])
         values: list = table.get("Price", [])
         quantities: list = table.get("Quantity", [])
-        columns : dict = self.getColumnIndex()
+        columns: dict = self.getColumnIndex()
         tableRow = self.tb_input.rowCount()
         self.tb_input.setRowCount(
             tableRow + max(len(weights), max(len(values), len(quantities))))
@@ -272,21 +276,30 @@ class GUI(Ui_mainwindow):
         weights: list = table.get("Weight", [])
         values: list = table.get("Price", [])
         quantities: list = table.get("Quantity", [])
-        columns : dict = self.getColumnIndex()
-        
-        self.tb_output.setRowCount(max(len(weights), max(len(values), len(quantities))) + 1)
-        for i in range(len(weights)):
-            self.tb_output.setItem(i, columns["Weight"], QtWidgets.QTableWidgetItem(str(weights[i])))
-        for i in range(len(values)):
-            self.tb_output.setItem(i, columns["Price"], QtWidgets.QTableWidgetItem(str(values[i])))
-        for i in range(len(quantities)):
-            self.tb_output.setItem(i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
+        columns: dict = self.getColumnIndex()
 
-        self.tb_output.setVerticalHeaderLabels([str(x + 1) for x in range(self.tb_output.rowCount())])
-        self.tb_output.setVerticalHeaderItem(self.tb_output.rowCount() - 1, QtWidgets.QTableWidgetItem("Total"))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Weight"], QtWidgets.QTableWidgetItem(str(sum(weights))))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
-        self.tb_output.setItem(self.tb_output.rowCount() - 1, columns["Quantity"], QtWidgets.QTableWidgetItem(str(sum(quantities))))
+        self.tb_output.setRowCount(
+            max(len(weights), max(len(values), len(quantities))) + 1)
+        for i in range(len(weights)):
+            self.tb_output.setItem(
+                i, columns["Weight"], QtWidgets.QTableWidgetItem(str(weights[i])))
+        for i in range(len(values)):
+            self.tb_output.setItem(
+                i, columns["Price"], QtWidgets.QTableWidgetItem(str(values[i])))
+        for i in range(len(quantities)):
+            self.tb_output.setItem(
+                i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
+
+        self.tb_output.setVerticalHeaderLabels(
+            [str(x + 1) for x in range(self.tb_output.rowCount())])
+        self.tb_output.setVerticalHeaderItem(
+            self.tb_output.rowCount() - 1, QtWidgets.QTableWidgetItem("Total"))
+        self.tb_output.setItem(self.tb_output.rowCount(
+        ) - 1, columns["Weight"], QtWidgets.QTableWidgetItem(str(sum(weights))))
+        self.tb_output.setItem(self.tb_output.rowCount(
+        ) - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
+        self.tb_output.setItem(self.tb_output.rowCount(
+        ) - 1, columns["Quantity"], QtWidgets.QTableWidgetItem(str(sum(quantities))))
 
     # Create dialog or message Widget
     def modalWidget(self, width: int = 400, height: int = 100) -> QWidget:
