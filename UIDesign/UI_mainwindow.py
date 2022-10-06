@@ -268,7 +268,7 @@ class Ui_mainwindow(object):
         self.cbb_algorithm.setItemText(3, _translate("mainwindow", "Dominance Relations"))
         self.cbb_algorithm.setItemText(4, _translate("mainwindow", "Backtrack"))
         self.cbb_algorithm.setItemText(5, _translate("mainwindow", "Brute Force"))
-        self.cbb_algorithm.setItemText(6, _translate("mainwindow", "Branchs and Bounds"))
+        self.cbb_algorithm.setItemText(6, _translate("mainwindow", "Branch and Bound"))
         self.btn_solve.setText(_translate("mainwindow", "Solve"))
         self.btn_exportInput.setText(_translate("mainwindow", "Export"))
         self.btn_randomInput.setText(_translate("mainwindow", "Random"))

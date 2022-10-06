@@ -6,7 +6,6 @@ from UI_mainwindow import Ui_mainwindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QFileDialog, QWidget, QTableWidgetItem, QMessageBox
 
-
 class GUI(Ui_mainwindow):
 
     # Init and setup window
@@ -54,46 +53,49 @@ class GUI(Ui_mainwindow):
 
     # Button solve clicked
     def btn_solve_clicked(self, checked) -> None:
+
         import sys
         import os
-
         SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
         sys.path.append(os.path.dirname(SCRIPT_DIR))
+        
+        import Algorithms.Algorithms as algorithms
 
-        from Algorithms.DynamicPrograming import DynamicPrograming 
-        from Algorithms.Greedy import GreedyProgram
-        from Algorithms.Backtrack import Backtrack
-
-        data = self.exportInputToJson()
-        C = data["maximum weight"]
-        W = data["table"]["Weight"]
-        P = data["table"]["Price"]
-        indexes = []
-
-        if self.cbb_algorithm.currentText() == "Dynamic Programing":
-            t1 = time()
-            indexes = DynamicPrograming.findSolution(C, W, P)
-            t2 = time()
-        elif self.cbb_algorithm.currentText() == "Greedy":
-            t1 = time()
-            indexes = GreedyProgram.findSolution(C, W, P)
-            t2 = time()
-        elif self.cbb_algorithm.currentText() == "Backtrack":
-            t1 = time()
-            indexes = Backtrack(W, P).findSolution(C)
-            t2 = time()
-        else:
+        algorithm = None
+        try:
+            data = self.exportInputToJson()
+            C = data["maximum weight"]
+            W = data["table"]["Weight"]
+            P = data["table"]["Price"]
+            indexes = []
+        except:
+            self.showMessageBox("Error", QMessageBox.critical,"Error when read input!")
             return
-    
-        self.addDataToOutputTable({
-            "table" : {
-                "Weight" : [W[x] for x in indexes],
-                "Price" : [P[x] for x in indexes],
-                "Quantity" : [1] * len(indexes)
-            }
-        })
+        try:
+            if self.cbb_algorithm.currentText() == "Dynamic Programing":
+                algorithm = algorithms.DynamicPrograming
+            elif self.cbb_algorithm.currentText() == "Greedy":
+                algorithm = algorithms.GreedyProgram
+            elif self.cbb_algorithm.currentText() == "Backtrack":
+                algorithm = algorithms.Backtrack
+            else:
+                return
+            
+            t1 = time()
+            indexes = algorithm.findSolution(C, W, P)
+            t2 = time()
+        
+            self.addDataToOutputTable({
+                "table" : {
+                    "Weight" : [W[x] for x in indexes],
+                    "Price" : [P[x] for x in indexes],
+                    "Quantity" : [1] * len(indexes)
+                }
+            })
 
-        self.lb_time.setText("Time: {} s".format(t2 - t1))
+            self.lb_time.setText("Time: {} s".format(t2 - t1))
+        except Exception as e:
+            self.showMessageBox("Error", QMessageBox.critical,str(e))
 
     # Add new row to input table and focus last row
     def btn_addInput_clicked(self, checked) -> None:
