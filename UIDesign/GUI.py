@@ -54,7 +54,6 @@ class GUI(Ui_mainwindow):
 
     # Button solve clicked
     def btn_solve_clicked(self, checked) -> None:
-
         import sys
         import os
         SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -79,6 +78,8 @@ class GUI(Ui_mainwindow):
                 algorithm = algorithms.GreedyProgram
             elif self.cbb_algorithm.currentText() == "Backtrack":
                 algorithm = algorithms.Backtrack
+            elif self.cbb_algorithm.currentText() == "Branch and Bound":
+                algorithm = algorithms.BranchAndBound
             else:
                 raise Exception("Can not find the algorithm!")
 
