@@ -5,17 +5,28 @@ class DynamicPrograming:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
         n = len(W)
-        dp = [0] * (C+1)  # Making the dp array
-        di = [list()] * (C+1)
+        K = [[0 for x in range(C + 1)] for x in range(n + 1)]
+ 
+        # Build table K[][] in bottom up manner
+        for i in range(n + 1):
+            for w in range(C + 1):
+                if i == 0 or w == 0:
+                    K[i][w] = 0
+                elif W[i-1] <= w:
+                    K[i][w] = max(P[i-1]
+                            + K[i-1][w-W[i-1]], 
+                                K[i-1][w])
+                else:
+                    K[i][w] = K[i-1][w]
 
-        for i in range(1, n+1):  # taking first i elements
-            for w in range(C, 0, -1):  # starting from back,so that we also have data of
-                                    # previous computation when taking i-1 items
-                if W[i-1] <= w:
-                    # finding the maximum value
-                    # dp[w] = max(dp[w], dp[w-W[i-1]]+P[i-1])
-                    if dp[w] < dp[w - W[i-1]]+P[i-1]:
-                        di[w] = di[w - W[i-1]] + [i - 1]
-                        dp[w] = dp[w - W[i-1]]+P[i-1]
-
-        return di[C]  # returning the maximum value of knapsack
+        i = n
+        w = C
+        result = []
+        while i > 0:
+            if K[i][w] != K[i - 1][w]:
+                result.append(i - 1)
+                w -= W[i - 1]
+                i -= 1
+            else:
+                i -= 1
+        return result
