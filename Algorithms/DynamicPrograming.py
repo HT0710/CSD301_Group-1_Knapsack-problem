@@ -4,6 +4,21 @@ from typing import List
 class DynamicPrograming:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
+        '''
+        Find a solution of knapsack problem using Dynamic Programing algorithms
+
+        @Parameters:
+        ----------
+            - C : weight of knapsack
+            - W : list weight of items
+            - P : list price of items
+
+        @Return
+        ----------
+        List indexes of selected items
+        '''
+
+        # Number of items
         n = len(W)
         K = [[0 for x in range(C + 1)] for x in range(n + 1)]
  
@@ -19,6 +34,7 @@ class DynamicPrograming:
                 else:
                     K[i][w] = K[i-1][w]
 
+        # Find items to give optimal result
         i = n
         w = C
         result = []
