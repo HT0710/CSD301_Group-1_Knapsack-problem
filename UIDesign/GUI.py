@@ -84,6 +84,8 @@ class GUI(Ui_mainwindow):
                     algorithm = algorithms.Backtrack
                 case "Branch and Bound":
                     algorithm = algorithms.BranchAndBound
+                case "Brute Force":
+                    algorithm = algorithms.BruteForce
                 case _:
                     raise Exception("Can not find the algorithm!")
 
