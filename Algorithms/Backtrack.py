@@ -6,7 +6,7 @@ class Backtrack:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
         '''
-        Find a solution of knapsack problem using Dynamic Programing algorithms
+        Find a solution of knapsack problem using Backtrack algorithms
 
         @Parameters:
         ----------
@@ -32,7 +32,7 @@ class Backtrack:
             return [0, []]
 
         if (w[n-1] > mW):
-            return Backtrack.__knapSack(mW, w, v, n-1)
+            return [0, []]
 
         set1 = Backtrack.__knapSack(mW-w[n-1], w, v, n-1)
         set2 = Backtrack.__knapSack(mW, w, v, n-1)
