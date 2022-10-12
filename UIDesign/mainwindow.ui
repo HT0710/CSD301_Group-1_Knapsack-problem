@@ -84,7 +84,7 @@
          </item>
          <item>
           <property name="text">
-           <string>Greedy</string>
+           <string>Brute Force</string>
           </property>
          </item>
          <item>
@@ -94,22 +94,22 @@
          </item>
          <item>
           <property name="text">
-           <string>Dominance Relations</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Backtrack</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Brute Force</string>
+           <string>Brute Force with Memorization</string>
           </property>
          </item>
          <item>
           <property name="text">
            <string>Branch and Bound</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Greedy</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genetic</string>
           </property>
          </item>
         </widget>
@@ -164,7 +164,48 @@
           <property name="topMargin">
            <number>0</number>
           </property>
-          <item row="4" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <item row="3" column="0">
+           <widget class="QWidget" name="wg_timeOut" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lb_timeOut">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>Timeout(ms):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="spb_timeOut">
+               <property name="decimals">
+                <number>3</number>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="6" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
            <widget class="QWidget" name="wg_buttonInput" native="true">
             <property name="enabled">
              <bool>true</bool>
@@ -225,7 +266,20 @@
             </layout>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <property name="text">
+             <string>—— Input ——</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
            <widget class="QTableWidget" name="tb_input">
             <property name="enabled">
              <bool>true</bool>
@@ -239,17 +293,14 @@
             <property name="gridStyle">
              <enum>Qt::DashLine</enum>
             </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
-            </property>
             <property name="rowCount">
              <number>0</number>
             </property>
             <property name="columnCount">
-             <number>3</number>
+             <number>2</number>
             </property>
             <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>100</number>
+             <number>150</number>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
              <bool>true</bool>
@@ -262,11 +313,6 @@
             <column>
              <property name="text">
               <string>Price</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Quantity</string>
              </property>
             </column>
            </widget>
@@ -312,16 +358,10 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <property name="text">
-             <string>--- Input ---</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+          <item row="4" column="0">
+           <widget class="Line" name="line_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -395,6 +435,9 @@
             <property name="rowCount">
              <number>0</number>
             </property>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>150</number>
+            </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
              <bool>true</bool>
             </attribute>
@@ -408,17 +451,12 @@
               <string>Price</string>
              </property>
             </column>
-            <column>
-             <property name="text">
-              <string>Quantity</string>
-             </property>
-            </column>
            </widget>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>--- Output ---</string>
+             <string>—— Output ——</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -509,9 +547,18 @@
     <addaction name="actionChangeMaximumWeight"/>
     <addaction name="actionChangeAlgorithm"/>
     <addaction name="actionSolve"/>
+    <addaction name="actionRandom"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionUserGuide"/>
+    <addaction name="actionKnapsackReport"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionImportDataToExist">
    <property name="checkable">
@@ -597,6 +644,30 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionRandom">
+   <property name="text">
+    <string>Random</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionUserGuide">
+   <property name="text">
+    <string>User guide</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionKnapsackReport">
+   <property name="text">
+    <string>Knapsack report</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

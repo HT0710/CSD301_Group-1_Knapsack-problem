@@ -45,6 +45,7 @@ class GUI(Ui_mainwindow):
             self.actionChangeMaximumWeight_triggered)
         self.actionChangeAlgorithm.triggered.connect(
             self.actionChangeAlgorithm_triggered)
+        self.actionRandom.triggered.connect(self.btn_randomInput_clicked)
 
     # Show the window
     def show(self) -> None:
@@ -80,12 +81,12 @@ class GUI(Ui_mainwindow):
                     algorithm = algorithms.DynamicPrograming
                 case "Greedy":
                     algorithm = algorithms.GreedyProgram
-                case "Backtrack":
-                    algorithm = algorithms.Backtrack
                 case "Branch and Bound":
                     algorithm = algorithms.BranchAndBound
                 case "Brute Force":
                     algorithm = algorithms.BruteForce
+                case "Genetic":
+                    algorithm = algorithms.Genetic
                 case _:
                     raise Exception("Can not find the algorithm!")
 
@@ -97,7 +98,6 @@ class GUI(Ui_mainwindow):
                 "table": {
                     "Weight": [W[x] for x in indexes],
                     "Price": [P[x] for x in indexes],
-                    "Quantity": [1] * len(indexes)
                 }
             })
 
@@ -139,12 +139,11 @@ class GUI(Ui_mainwindow):
         max_weights = self.spb_maximumWeight.value()
         weights = [int(random() * max_weights + 1) for i in range(max_weights)]
         price = [int(random() * max_weights + 1) for i in range(max_weights)]
-        quantities = [1] * max_weights
+        
         self.addDataToInputTable({
             "table": {
                 "Weight": weights,
                 "Price": price,
-                "Quantity": quantities
             }
         })
 
@@ -257,40 +256,32 @@ class GUI(Ui_mainwindow):
         table: dict = jsonData.get("table", {})
         weights: list = table.get("Weight", [])
         values: list = table.get("Price", [])
-        quantities: list = table.get("Quantity", [])
         columns: dict = self.getColumnIndex()
         tableRow = self.tb_input.rowCount()
         self.tb_input.setRowCount(
-            tableRow + max(len(weights), max(len(values), len(quantities))))
+            tableRow + max(len(weights), len(quantities)))
         for i in range(len(weights)):
             self.tb_input.setItem(
                 tableRow + i, columns["Weight"], QtWidgets.QTableWidgetItem(str(weights[i])))
         for i in range(len(values)):
             self.tb_input.setItem(
                 tableRow + i, columns["Price"], QtWidgets.QTableWidgetItem(str(values[i])))
-        for i in range(len(quantities)):
-            self.tb_input.setItem(
-                tableRow + i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
 
     # Add data to combobox algorithm, spinbox maximum weight and input table
     def addDataToOutputTable(self, jsonData: dict) -> None:
         table: dict = jsonData.get("table", {})
         weights: list = table.get("Weight", [])
         values: list = table.get("Price", [])
-        quantities: list = table.get("Quantity", [])
         columns: dict = self.getColumnIndex()
 
         self.tb_output.setRowCount(
-            max(len(weights), max(len(values), len(quantities))) + 1)
+            max(len(weights), len(values)) + 1)
         for i in range(len(weights)):
             self.tb_output.setItem(
                 i, columns["Weight"], QtWidgets.QTableWidgetItem(str(weights[i])))
         for i in range(len(values)):
             self.tb_output.setItem(
                 i, columns["Price"], QtWidgets.QTableWidgetItem(str(values[i])))
-        for i in range(len(quantities)):
-            self.tb_output.setItem(
-                i, columns["Quantity"], QtWidgets.QTableWidgetItem(str(quantities[i])))
 
         self.tb_output.setVerticalHeaderLabels(
             [str(x + 1) for x in range(self.tb_output.rowCount())])
@@ -300,8 +291,7 @@ class GUI(Ui_mainwindow):
         ) - 1, columns["Weight"], QtWidgets.QTableWidgetItem(str(sum(weights))))
         self.tb_output.setItem(self.tb_output.rowCount(
         ) - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
-        self.tb_output.setItem(self.tb_output.rowCount(
-        ) - 1, columns["Quantity"], QtWidgets.QTableWidgetItem(str(sum(quantities))))
+        
 
     # Create dialog or message Widget
     def modalWidget(self, width: int = 400, height: int = 100) -> QWidget:
