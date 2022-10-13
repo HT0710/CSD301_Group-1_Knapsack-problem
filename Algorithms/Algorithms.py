@@ -4,6 +4,7 @@ import os
 
 from Algorithms.BranchAndBound import BranchAndBound
 from Algorithms.BruteForce import BruteForce
+from Algorithms.BruteForceMemorization import BruteForceMemorization
 from Algorithms.Genetic import Genetic
 from .DynamicPrograming import DynamicPrograming
 from .Greedy import GreedyProgram
@@ -15,5 +16,6 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 DynamicPrograming = DynamicPrograming
 GreedyProgram = GreedyProgram
 BranchAndBound = BranchAndBound
+BruteForceMemorization = BruteForceMemorization
 BruteForce = BruteForce
 Genetic = Genetic
