@@ -180,7 +180,7 @@ class GUI(Ui_mainwindow):
         '''
         Close window
         '''
-        if showConfirmBox(message="Do you sure to exit?") == QMessageBox.Yes:
+        if showConfirmBox(message="Do you sure to exit?") == QMessageBox.Yes:  # type: ignore
             self.mainwindow.close()
 
     def actionImportDataToExist_triggered(self, checked) -> None:

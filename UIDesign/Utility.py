@@ -25,7 +25,7 @@ def openFileNameDialog() -> str:
     Show open file dialog and return full path of selected file
     '''
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog
+    options |= QFileDialog.DontUseNativeDialog  # type: ignore
     fileName, _ = QFileDialog.getOpenFileName(modalWidget(), "Import Data", "", "JSON Files (*.json);;Input Files (*.inp);;All Files (*)", options=options)
     return fileName
 
@@ -34,7 +34,7 @@ def saveFileDialog()  -> str:
     Show save file dialog and return full path of saved file
     '''
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog
+    options |= QFileDialog.DontUseNativeDialog  # type: ignore
     fileName, _ = QFileDialog.getSaveFileName(modalWidget(), "Export Data", "", "JSON Files (*.json);;Input Files (*.inp);;All Files (*)", options=options)
     return fileName
 
@@ -141,11 +141,11 @@ def showMessageBox(title: str = "Notification", boxType: Callable = QMessageBox.
     '''
     Show messagebox that only display message and OK button
     '''
-    boxType(modalWidget(), title, message, QMessageBox.Ok)
+    boxType(modalWidget(), title, message, QMessageBox.Ok)  # type: ignore
 
 def showConfirmBox(title: str = "Confirm", message: str = "") -> QMessageBox.StandardButton:
     '''
     Show confirm box that return Yes or No
     '''
-    reply = QMessageBox.question(modalWidget(), title, message, QMessageBox.No | QMessageBox.Yes)
+    reply = QMessageBox.question(modalWidget(), title, message, QMessageBox.No | QMessageBox.Yes)  # type: ignore
     return reply

@@ -19,7 +19,7 @@ class Ui_mainwindow(object):
         mainwindow.setMinimumSize(QtCore.QSize(800, 600))
         mainwindow.setContextMenuPolicy(QtCore.Qt.PreventContextMenu)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/Icon/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/Icon/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         mainwindow.setWindowIcon(icon)
         mainwindow.setDockNestingEnabled(True)
         mainwindow.setDockOptions(QtWidgets.QMainWindow.AllowNestedDocks|QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks|QtWidgets.QMainWindow.ForceTabbedDocks|QtWidgets.QMainWindow.VerticalTabs)

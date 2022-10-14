@@ -27,8 +27,8 @@
    <string>Knapsack Solving Tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../KnapsackProblem/UIDesign/Resource/resource.qrc">
-    <normaloff>:/Icon/icon.ico</normaloff>:/Icon/icon.ico</iconset>
+   <iconset resource="Resource/resource.qrc">
+    <normaloff>:/Icon/icon.png</normaloff>:/Icon/icon.png</iconset>
   </property>
   <property name="dockNestingEnabled">
    <bool>true</bool>
@@ -166,7 +166,7 @@
           </property>
           <item row="3" column="0">
            <widget class="QWidget" name="wg_timeOut" native="true">
-            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="">
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -649,7 +649,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../../KnapsackProblem/UIDesign/Resource/resource.qrc"/>
+  <include location="Resource/resource.qrc"/>
  </resources>
  <connections/>
 </ui>
