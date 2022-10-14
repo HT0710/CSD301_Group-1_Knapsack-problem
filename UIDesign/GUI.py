@@ -115,7 +115,8 @@ class GUI(Ui_mainwindow):
             })
             
             self.lb_time.setText("Time: {} s".format(t2 - t1))
-            self.lb_status.setText("Status: " + ("completed!" if t2 - t1 <= 10 else "time out!"))
+            self.lb_status.setText("Status: completed!")
+            showMessageBox("Information", QMessageBox.information, "Solved problem successfully!")
 
         except Exception as e:
             self.lb_status.setText("Status: error!")
