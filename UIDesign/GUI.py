@@ -1,8 +1,9 @@
 import sys
 import os
-from multiprocessing import Process, Manager
+# Add base path to system for more imports
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 from random import random
 from time import time
 from UIDesign.Utility import *
@@ -12,9 +13,17 @@ import Algorithms.Algorithms as algorithms
 
 
 class GUI(Ui_mainwindow):
+    '''
+    GUI
+    ----------
 
-    # Init and setup window
+    GUI with actions and triggers
+    '''
+    
     def __init__(self) -> None:
+        '''
+        Init and setup window
+        '''
         super().__init__()
         self.mainwindow = QtWidgets.QMainWindow()
         self.setupUi(self.mainwindow)
@@ -94,19 +103,9 @@ class GUI(Ui_mainwindow):
                 case _:
                     raise Exception("Can not find the algorithm!")
 
-            indexes = Manager().list()
-            def do():
-                indexes1 = algorithm.findSolution(C, W, P)
-                for i in indexes1:
-                    indexes.append(i)
-            
-
-            prc = Process(target=do)
             t1 = time()
-            prc.start()
-            prc.join(timeout=self.spb_timeOut.value())
+            indexes = algorithm.findSolution(C, W, P)
             t2 = time()
-            prc.terminate()
 
             addDataToOutputTable(self, {
                 "table": {
@@ -120,7 +119,7 @@ class GUI(Ui_mainwindow):
 
         except Exception as e:
             self.lb_status.setText("Status: error!")
-            showMessageBox(self, "Error", QMessageBox.critical, str(e))
+            showMessageBox("Error", QMessageBox.critical, str(e))
 
             
     def btn_addInput_clicked(self, checked) -> None:

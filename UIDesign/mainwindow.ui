@@ -166,7 +166,7 @@
           </property>
           <item row="3" column="0">
            <widget class="QWidget" name="wg_timeOut" native="true">
-            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1">
+            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -179,29 +179,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="lb_timeOut">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="text">
-                <string>Timeout (s):</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QDoubleSpinBox" name="spb_timeOut">
-               <property name="decimals">
-                <number>3</number>
-               </property>
-               <property name="maximum">
-                <double>100000.000000000000000</double>
-               </property>
-               <property name="value">
-                <double>10.000000000000000</double>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
