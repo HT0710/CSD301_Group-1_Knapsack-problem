@@ -3,7 +3,9 @@
 ---- Utilities functions ----
 '''
 
+import builtins
 import json
+from typing import Callable
 from UIDesign.UI_mainwindow import Ui_mainwindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QFileDialog, QWidget, QTableWidgetItem, QMessageBox
@@ -48,7 +50,7 @@ def readData(fileName: str) -> dict:
         return data
     return dict()
 
-def saveData(fileName: str, jsonData: str) -> None:
+def saveData(fileName: str, jsonData: dict) -> None:
     '''
     Save data to file with given file name and JSON data
     '''
@@ -127,22 +129,24 @@ def addDataToOutputTable(UIWindow : Ui_mainwindow, jsonData: dict) -> None:
     ) - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
     
 
-def modalWidget(width: int = 400, height: int = 100) -> QWidget:
+def modalWidget(x : int, y : int, width: int = 400, height: int = 100) -> QWidget:
     '''
     Create dialog or message Widget
     '''
     wget = QWidget()
     wget.setFixedSize(width, height)
+    wget.move(x - width // 2, y - height // 2)
+    return wget
 
-def showMessageBox(title: str = "Notification", boxType: QMessageBox.StandardButton = QMessageBox.information, message: str = "") -> None:
+def showMessageBox(title: str = "Notification", boxType: Callable = QMessageBox.information, message: str = "") -> None:
     '''
     Show messagebox that only display message and OK button
     '''
-    boxType(modalWidget(), title, message, QMessageBox.Ok)
+    boxType(modalWidget(960, 540), title, message, QMessageBox.Ok)
 
 def showConfirmBox(title: str = "Confirm", message: str = "") -> QMessageBox.StandardButton:
     '''
     Show confirm box that return Yes or No
     '''
-    reply = QMessageBox.question(modalWidget(), title, message, QMessageBox.No | QMessageBox.Yes)
+    reply = QMessageBox.question(modalWidget(960, 540), title, message, QMessageBox.No | QMessageBox.Yes)
     return reply
