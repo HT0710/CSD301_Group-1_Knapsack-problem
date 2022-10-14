@@ -65,7 +65,6 @@ def exportInputToJson(UIWindow : Ui_mainwindow)  -> dict:
     jsonData = dict()
     jsonData["algorithm"] = UIWindow.cbb_algorithm.currentText()
     jsonData["maximum weight"] = UIWindow.spb_maximumWeight.value()
-    jsonData["time out"] = UIWindow.spb_timeOut.value()
     for key in columns:
         columns[key] = [int(UIWindow.tb_input.item(i, columns[key]).text())
                         for i in range(UIWindow.tb_input.rowCount())]
@@ -129,7 +128,7 @@ def addDataToOutputTable(UIWindow : Ui_mainwindow, jsonData: dict) -> None:
     ) - 1, columns["Price"], QtWidgets.QTableWidgetItem(str(sum(values))))
     
 
-def modalWidget(x : int, y : int, width: int = 400, height: int = 100) -> QWidget:
+def modalWidget(x : int = 960, y : int = 540, width: int = 400, height: int = 100) -> QWidget:
     '''
     Create dialog or message Widget
     '''
@@ -142,11 +141,11 @@ def showMessageBox(title: str = "Notification", boxType: Callable = QMessageBox.
     '''
     Show messagebox that only display message and OK button
     '''
-    boxType(modalWidget(960, 540), title, message, QMessageBox.Ok)
+    boxType(modalWidget(), title, message, QMessageBox.Ok)
 
 def showConfirmBox(title: str = "Confirm", message: str = "") -> QMessageBox.StandardButton:
     '''
     Show confirm box that return Yes or No
     '''
-    reply = QMessageBox.question(modalWidget(960, 540), title, message, QMessageBox.No | QMessageBox.Yes)
+    reply = QMessageBox.question(modalWidget(), title, message, QMessageBox.No | QMessageBox.Yes)
     return reply
