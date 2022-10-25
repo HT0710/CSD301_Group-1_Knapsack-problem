@@ -107,11 +107,6 @@
            <string>Greedy</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>Genetic</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item alignment="Qt::AlignLeft">

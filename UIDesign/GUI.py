@@ -98,8 +98,8 @@ class GUI(Ui_mainwindow):
                     algorithm = algorithms.BruteForce
                 case "Brute Force with Memorization":
                     algorithm = algorithms.BruteForceMemorization
-                case "Genetic":
-                    algorithm = algorithms.Genetic
+                case "Meet-in-the-middle":
+                    algorithm = algorithms.MeetInTheMiddle
                 case _:
                     raise Exception("Can not find the algorithm!")
 
