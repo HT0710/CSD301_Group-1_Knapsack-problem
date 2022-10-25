@@ -5,7 +5,7 @@ import os
 from Algorithms.BranchAndBound import BranchAndBound
 from Algorithms.BruteForce import BruteForce
 from Algorithms.BruteForceMemorization import BruteForceMemorization
-from Algorithms.Genetic import Genetic
+from Algorithms.MeetInTheMiddle import MeetInTheMiddle
 from .DynamicPrograming import DynamicPrograming
 from .Greedy import GreedyProgram
 
@@ -18,4 +18,4 @@ GreedyProgram = GreedyProgram
 BranchAndBound = BranchAndBound
 BruteForceMemorization = BruteForceMemorization
 BruteForce = BruteForce
-Genetic = Genetic
+MeetInTheMiddle = MeetInTheMiddle
