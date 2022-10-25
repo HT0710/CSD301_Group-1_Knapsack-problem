@@ -1,7 +1,10 @@
 from typing import List
 
+# Maximum count of recursion call
+MAX_RECURSION = 150000
 
 class BruteForce:
+    __maxRecursion = MAX_RECURSION
 
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
@@ -21,12 +24,19 @@ class BruteForce:
 
         # Number of items
         n = len(W)
+        BruteForce.__maxRecursion = MAX_RECURSION
         result = BruteForce.__knapSack(C, W, P, n)
 
         return result[1]
 
     @staticmethod
     def __knapSack(mW: int, w, v, n):
+        '''
+        Recursive function for solving knapsack problem
+        '''
+        BruteForce.__maxRecursion -= 1
+        if (BruteForce.__maxRecursion < 0):
+            raise Exception('Max recursion error!')
 
         if (mW == 0 or n == 0):
             return [0, []]
