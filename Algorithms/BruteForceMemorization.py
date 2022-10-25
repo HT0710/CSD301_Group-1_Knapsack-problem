@@ -30,7 +30,6 @@ class BruteForceMemorization:
         BruteForceMemorization.__KP = {}
         sys.setrecursionlimit(1500)
         result = BruteForceMemorization.__knapSack(C, W, P, n)
-        print(result[0])
         return result[1]
 
     @staticmethod
