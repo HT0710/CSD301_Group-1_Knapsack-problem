@@ -1,7 +1,8 @@
 from typing import List
+import sys
 
 # Maximum count of recursion call
-MAX_RECURSION = 150000
+MAX_RECURSION = 1e6
 
 class BruteForce:
     __maxRecursion = MAX_RECURSION
@@ -25,6 +26,7 @@ class BruteForce:
         # Number of items
         n = len(W)
         BruteForce.__maxRecursion = MAX_RECURSION
+        sys.setrecursionlimit(1500)
         result = BruteForce.__knapSack(C, W, P, n)
 
         return result[1]
