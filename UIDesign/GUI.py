@@ -1,5 +1,7 @@
 import sys
 import os
+
+from random_dialog import Ui_dgRandom
 # Add base path to system for more imports
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -25,8 +27,16 @@ class GUI(Ui_mainwindow):
         Init and setup window
         '''
         super().__init__()
+        # Main window
         self.mainwindow = QtWidgets.QMainWindow()
         self.setupUi(self.mainwindow)
+
+        # Random dialog
+        self.dgRandom = QtWidgets.QDialog(self.mainwindow)
+        self.ui_dgRandom = Ui_dgRandom()
+        self.ui_dgRandom.setupUi(self.dgRandom)
+        self.dgRandom.setWindowFlag(QtCore.Qt.Popup, True)
+
         self.setupSignal()
 
     def setupSignal(self) -> None:
@@ -38,6 +48,7 @@ class GUI(Ui_mainwindow):
         self.btn_addInput.clicked.connect(self.btn_addInput_clicked)
         self.btn_deleteInput.clicked.connect(self.btn_deleteInput_clicked)
         self.btn_exportInput.clicked.connect(self.btn_exportInput_clicked)
+        self.btn_exportOutput.clicked.connect(self.btn_exportOutput_clicked)
         self.btn_randomInput.clicked.connect(self.btn_randomInput_clicked)
 
         # Actions in Menu File
@@ -47,6 +58,8 @@ class GUI(Ui_mainwindow):
             self.actionImportDataToNew_triggered)
         self.actionExportInput.triggered.connect(
             self.btn_exportInput_clicked)
+        self.actionExportOutput.triggered.connect(
+            self.btn_exportOutput_clicked)
         self.actionExit.triggered.connect(self.actionExit_triggered)
 
         # Actions in Menu Edit
@@ -157,20 +170,40 @@ class GUI(Ui_mainwindow):
                 showMessageBox( 
                     message="Error when export input data!", boxType=QMessageBox.critical)
 
+    def btn_exportOutput_clicked(self, checked) -> None:
+        '''
+        Convert input data to JSON then save to file
+        '''
+        fileName = saveFileDialog()
+        if fileName:
+            try:
+                jsonData = exportOutputToJson(self)
+                saveData(fileName, jsonData)
+                showMessageBox( 
+                    message="Export output data successfully!", boxType=QMessageBox.information)
+            except:
+                showMessageBox( 
+                    message="Error when export output data!", boxType=QMessageBox.critical)
+
     def btn_randomInput_clicked(self, checked) -> None:
         '''
-        Generate the number of (max weight) inputs with value in range of maximum weight and add them into input table
+        Open new input popup for maximum weight, maximum price and count for random new inputs
         '''
-        max_weights = self.spb_maximumWeight.value()
-        weights = [int(random() * max_weights + 1) for i in range(max_weights)]
-        price = [int(random() * max_weights + 1) for i in range(max_weights)]
-        
-        addDataToInputTable(self, {
-            "table": {
-                "Weight": weights,
-                "Price": price,
-            }
-        })
+
+
+        if self.dgRandom.exec_():
+            max_weights = self.ui_dgRandom.spb_maximumWeight.value()
+            max_prices = self.ui_dgRandom.spb_maximumPrice.value()
+            count = self.ui_dgRandom.spb_count.value()
+            weights = [int(random() * max_weights + 1) for i in range(count)]
+            price = [int(random() * max_prices + 1) for i in range(count)]
+            
+            addDataToInputTable(self, {
+                "table": {
+                    "Weight": weights,
+                    "Price": price,
+                }
+            })
 
     '''
     ---- Actions in File Menu ----

@@ -71,6 +71,27 @@ def exportInputToJson(UIWindow : Ui_mainwindow)  -> dict:
     jsonData["table"] = columns
     return jsonData
 
+def exportOutputToJson(UIWindow : Ui_mainwindow)  -> dict:
+    '''
+    Convert data from combobox algorithm, spinbox maximum weight and input table to JSON string
+    '''
+    jsonData = dict()
+    jsonData["algorithm"] = UIWindow.cbb_algorithm.currentText()
+    jsonData["maximum weight"] = UIWindow.spb_maximumWeight.value()
+    
+    columns = getColumnIndex(UIWindow)
+    for key in columns:
+        columns[key] = [int(UIWindow.tb_input.item(i, columns[key]).text())
+                        for i in range(UIWindow.tb_input.rowCount())]
+    jsonData["input"] = columns.copy()
+
+    columns = getColumnIndex(UIWindow)
+    for key in columns:
+        columns[key] = [int(UIWindow.tb_output.item(i, columns[key]).text())
+                        for i in range(UIWindow.tb_output.rowCount() - 1)]
+    jsonData["output"] = columns.copy()
+    return jsonData
+
 def addDataToInputTable(UIWindow : Ui_mainwindow, jsonData: dict) -> None:
     '''
     Add data to combobox algorithm, spinbox maximum weight and input table
