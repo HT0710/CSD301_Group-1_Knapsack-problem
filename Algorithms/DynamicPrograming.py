@@ -1,6 +1,8 @@
 
 from typing import List
 
+MAX_COMPLEXITY = 1e7
+
 class DynamicPrograming:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
@@ -20,6 +22,10 @@ class DynamicPrograming:
 
         # Number of items
         n = len(W)
+
+        if n * C > MAX_COMPLEXITY:
+            raise Exception('N x C must be less than {}'.format(MAX_COMPLEXITY))
+
         K = [[0 for x in range(C + 1)] for x in range(n + 1)]
  
         # Build table K[][] in bottom up manner
