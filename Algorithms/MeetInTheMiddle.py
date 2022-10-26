@@ -37,7 +37,7 @@ class MeetInTheMiddle:
         n = len(W)
 
         if (n > 30):
-            raise Exception('The number of items must be less than 40!')
+            raise Exception('The number of items must be less than 30!')
 
         # Compute all subset of first and second
         X = MeetInTheMiddle.__calcSubArray(n // 2, 0)
@@ -71,7 +71,7 @@ class MeetInTheMiddle:
                     p -= 1
 
                 for j in range(p + 1):  
-                    if (X_P[j] + Y_P[i] > maxP):
+                    if (X_P[i] + Y_P[j] > maxP):
                         maxX = Y[j] + X[i]
                         maxP = Y_P[j] + X_P[i]
         return maxX
