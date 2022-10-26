@@ -1,5 +1,7 @@
 from typing import List
 
+MAX_ITEMS = 1e3
+
 class GreedyProgram:
     @staticmethod
     def findSolution(C : int, W : List[int], P : List[int]) -> List[int]:
@@ -19,6 +21,10 @@ class GreedyProgram:
 
         # Number of items
         n = len(W)
+
+        if n > MAX_ITEMS:
+            raise('Maximum count of items are {}'.format(MAX_ITEMS))
+
         indexes = [x for x in range(n)]
         indexes.sort(key = lambda i : P[i]/W[i], reverse=True)
 
