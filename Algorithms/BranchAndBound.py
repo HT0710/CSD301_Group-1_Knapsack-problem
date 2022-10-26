@@ -2,6 +2,8 @@ import queue
 from time import time
 from typing import List
 
+MAX_NODES = 1e6
+
 class Node:
     def __init__(self, level : int, profit : float, weight : int, index : int, parent) -> None:
         self.level = level # The level within the tree (depth)
@@ -59,7 +61,12 @@ class BranchAndBound:
         maxProfit = 0
         maxU : Node | None = None
         bound = 0
+        countNode = 0
         while not q.empty():
+            countNode += 1
+            if countNode > MAX_NODES:
+                raise Exception('Maximum nodes of queue!')
+                
             v : Node = q.get() # Get the next item on the queue
             uLevel = v.level + 1
             u = Node(uLevel, v.profit + P[indexes[uLevel]], v.weight + W[indexes[uLevel]], uLevel, v)
