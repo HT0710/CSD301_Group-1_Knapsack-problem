@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>489</width>
-    <height>227</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>489</width>
-    <height>227</height>
+    <height>250</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>489</width>
-    <height>227</height>
+    <height>250</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -63,14 +63,14 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QLabel" name="lb_maximumPrice">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Maximum price:</string>
+         <string>Maximum weight:</string>
         </property>
        </widget>
       </item>
@@ -120,6 +120,35 @@
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="wg_createOption" native="true">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QRadioButton" name="rd_createOption">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string>Remove existed inputs</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
     </widget>
    </item>
    <item>

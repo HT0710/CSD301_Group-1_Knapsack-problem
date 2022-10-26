@@ -197,6 +197,9 @@ class GUI(Ui_mainwindow):
             count = self.ui_dgRandom.spb_count.value()
             weights = [int(random() * max_weights + 1) for i in range(count)]
             price = [int(random() * max_prices + 1) for i in range(count)]
+            is_reset = self.ui_dgRandom.rd_createOption.isChecked()
+            if is_reset:
+                self.tb_input.setRowCount(0)
             
             addDataToInputTable(self, {
                 "table": {
