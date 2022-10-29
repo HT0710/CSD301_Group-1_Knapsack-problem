@@ -2,3 +2,6 @@
 *.pyc
 *.pyc
 *.pyc
+*.pyc
+UIDesign/__pycache__/resource_rc.cpython-310.pyc
+*.pyc
