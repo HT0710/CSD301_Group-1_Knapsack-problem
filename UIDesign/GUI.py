@@ -11,7 +11,7 @@ from time import time
 from UIDesign.Utility import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-import Algorithms.Algorithms as algorithms
+import Algorithms.Algorithm as algorithms
 
 
 class GUI(Ui_mainwindow):

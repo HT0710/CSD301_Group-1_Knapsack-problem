@@ -30,7 +30,7 @@ class Ui_dgRandom(object):
         self.horizontalLayout.addWidget(self.lb_maximumWeight)
         self.spb_maximumWeight = QtWidgets.QSpinBox(self.wg_maxWeight)
         self.spb_maximumWeight.setEnabled(True)
-        self.spb_maximumWeight.setMaximum(100000)
+        self.spb_maximumWeight.setMaximum(1000000)
         self.spb_maximumWeight.setProperty("value", 1000)
         self.spb_maximumWeight.setObjectName("spb_maximumWeight")
         self.horizontalLayout.addWidget(self.spb_maximumWeight)
@@ -46,7 +46,7 @@ class Ui_dgRandom(object):
         self.horizontalLayout_4.addWidget(self.lb_maximumPrice)
         self.spb_maximumPrice = QtWidgets.QSpinBox(self.wg_maxPrice)
         self.spb_maximumPrice.setEnabled(True)
-        self.spb_maximumPrice.setMaximum(100000)
+        self.spb_maximumPrice.setMaximum(1000000)
         self.spb_maximumPrice.setProperty("value", 1000)
         self.spb_maximumPrice.setObjectName("spb_maximumPrice")
         self.horizontalLayout_4.addWidget(self.spb_maximumPrice)
@@ -98,7 +98,7 @@ class Ui_dgRandom(object):
         _translate = QtCore.QCoreApplication.translate
         dgRandom.setWindowTitle(_translate("dgRandom", "Random"))
         self.lb_maximumWeight.setText(_translate("dgRandom", "Maximum weight:"))
-        self.lb_maximumPrice.setText(_translate("dgRandom", "Maximum weight:"))
+        self.lb_maximumPrice.setText(_translate("dgRandom", "Maximum price:"))
         self.lb_count.setText(_translate("dgRandom", "Count:"))
         self.rd_createOption.setText(_translate("dgRandom", "Remove existed inputs"))
 

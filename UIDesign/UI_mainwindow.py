@@ -137,7 +137,7 @@ class Ui_mainwindow(object):
         self.horizontalLayout_6.addWidget(self.lb_maximumWeight)
         self.spb_maximumWeight = QtWidgets.QSpinBox(self.wg_maxWeight)
         self.spb_maximumWeight.setEnabled(True)
-        self.spb_maximumWeight.setMaximum(100000)
+        self.spb_maximumWeight.setMaximum(1000000)
         self.spb_maximumWeight.setObjectName("spb_maximumWeight")
         self.horizontalLayout_6.addWidget(self.spb_maximumWeight)
         self.horizontalLayout_6.setStretch(1, 1)
