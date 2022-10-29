@@ -1,7 +1,7 @@
 
 from typing import List
 
-MAX_COMPLEXITY = 1e7
+MAX_COMPLEXITY = 1e9
 
 class DynamicPrograming:
     @staticmethod

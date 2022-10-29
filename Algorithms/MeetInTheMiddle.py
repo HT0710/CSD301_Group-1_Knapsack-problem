@@ -36,8 +36,8 @@ class MeetInTheMiddle:
         # Number of items
         n = len(W)
 
-        if (n > 30):
-            raise Exception('The number of items must be less than 30!')
+        if (n > 40):
+            raise Exception('The number of items must be less than 40!')
 
         # Compute all subset of first and second
         X = MeetInTheMiddle.__calcSubArray(n // 2, 0)
