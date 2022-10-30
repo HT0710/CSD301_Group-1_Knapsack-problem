@@ -2,7 +2,7 @@ import queue
 from time import time
 from typing import List
 
-MAX_NODES = 1e8
+MAX_NODES = 1e7
 
 class Node:
     def __init__(self, level : int, profit : float, weight : int, index : int, parent) -> None:
