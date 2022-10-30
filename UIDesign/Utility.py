@@ -3,7 +3,6 @@
 ---- Utilities functions ----
 '''
 
-import builtins
 import json
 from typing import Callable
 from UIDesign.UI_mainwindow import Ui_mainwindow

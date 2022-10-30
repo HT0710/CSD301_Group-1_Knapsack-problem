@@ -1,10 +1,7 @@
 import sys
 import os
 
-from random_dialog import Ui_dgRandom
-# Add base path to system for more imports
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+from UIDesign.random_dialog import Ui_dgRandom
 
 from random import random
 from time import time
@@ -267,10 +264,10 @@ class GUI(Ui_mainwindow):
         self.cbb_algorithm.showPopup()
         self.cbb_algorithm.setFocus()
 
-# Run GUI app
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ui = GUI()
-    ui.show()
-    sys.exit(app.exec_())
+# # Run GUI app
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     ui = GUI()
+#     ui.show()
+#     sys.exit(app.exec_())
