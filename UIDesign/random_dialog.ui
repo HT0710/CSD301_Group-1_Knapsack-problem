@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
-    <height>250</height>
+    <width>500</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>489</width>
-    <height>250</height>
+    <width>500</width>
+    <height>300</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>489</width>
-    <height>250</height>
+    <width>500</width>
+    <height>300</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -127,14 +127,24 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QRadioButton" name="rd_createOption">
+       <widget class="QCheckBox" name="cb_weightOnly">
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
         </property>
         <property name="text">
-         <string>Remove existed inputs</string>
+         <string>Only random weights</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cb_clearExisted">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string>Clear existed inputs</string>
         </property>
         <property name="checked">
          <bool>true</bool>

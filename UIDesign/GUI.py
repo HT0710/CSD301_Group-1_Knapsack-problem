@@ -194,10 +194,14 @@ class GUI(Ui_mainwindow):
         if self.dgRandom.exec_():
             max_weights = self.ui_dgRandom.spb_maximumWeight.value()
             max_prices = self.ui_dgRandom.spb_maximumPrice.value()
+            is_reset = self.ui_dgRandom.cb_clearExisted.isChecked()
+            is_weight_only = self.ui_dgRandom.cb_weightOnly.isChecked()
             count = self.ui_dgRandom.spb_count.value()
             weights = [int(random() * max_weights + 1) for i in range(count)]
-            price = [int(random() * max_prices + 1) for i in range(count)]
-            is_reset = self.ui_dgRandom.rd_createOption.isChecked()
+            if not is_weight_only:
+                price = [int(random() * max_prices + 1) for i in range(count)]
+            else:
+                price = weights.copy()
             if is_reset:
                 self.tb_input.setRowCount(0)
             
