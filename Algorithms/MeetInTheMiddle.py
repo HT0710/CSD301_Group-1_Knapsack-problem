@@ -2,7 +2,7 @@ from math import log2
 from typing import List
 import bisect
 
-MAX_RECURSION = 1e8
+MAX_RECURSION = 1e7
 
 class MeetInTheMiddle:
     
