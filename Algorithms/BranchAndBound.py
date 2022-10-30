@@ -2,7 +2,7 @@ import queue
 from time import time
 from typing import List
 
-MAX_NODES = 1e6
+MAX_NODES = 1e9
 
 class Node:
     def __init__(self, level : int, profit : float, weight : int, index : int, parent) -> None:
@@ -88,8 +88,7 @@ class BranchAndBound:
         # Find items to give optimal result
         curNode = maxU
         result = []
-        while curNode and curNode.level != -1:
+        while curNode and curNode.index != -1:
             result.append(indexes[curNode.index])
             curNode = curNode.parent
-
         return result

@@ -1,5 +1,8 @@
+from math import log2
 from typing import List
 import bisect
+
+MAX_RECURSION = 1e8
 
 class MeetInTheMiddle:
     
@@ -36,8 +39,8 @@ class MeetInTheMiddle:
         # Number of items
         n = len(W)
 
-        if (n > 40):
-            raise Exception('The number of items must be less than 40!')
+        if (2**(n // 2) > MAX_RECURSION):
+            raise Exception('The number of items must be less than {}!'.format(int(2 * log2(MAX_RECURSION))))
 
         # Compute all subset of first and second
         X = MeetInTheMiddle.__calcSubArray(n // 2, 0)
@@ -69,9 +72,8 @@ class MeetInTheMiddle:
                 # If C - X_W[i] was not in array Y then decrease p by 1
                 if (p == size_Y or (p < size_Y and Y_W[p] != (C - X_W[i]))):
                     p -= 1
-
-                for j in range(p + 1):  
-                    if (X_P[i] + Y_P[j] > maxP):
-                        maxX = Y[j] + X[i]
-                        maxP = Y_P[j] + X_P[i]
+ 
+                if (X_P[i] + Y_P[p] > maxP):
+                    maxX = Y[p] + X[i]
+                    maxP = Y_P[p] + X_P[i]
         return maxX

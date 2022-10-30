@@ -2,7 +2,7 @@ from typing import List
 import sys
 
 # Maximum count of recursion call
-MAX_RECURSION = 1e6
+MAX_RECURSION = 1e9
 
 class BruteForce:
     __maxRecursion = MAX_RECURSION
