@@ -10,13 +10,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1000</width>
     <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
+    <width>1000</width>
     <height>600</height>
    </size>
   </property>
@@ -37,16 +37,13 @@
    <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks|QMainWindow::ForceTabbedDocks|QMainWindow::VerticalTabs</set>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,7,0,0">
-    <property name="spacing">
-     <number>9</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QWidget" name="wg_algorithm" native="true">
+     <widget class="QWidget" name="wg_algorithm_2" native="true">
       <property name="enabled">
        <bool>true</bool>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,0,0">
        <property name="spacing">
         <number>20</number>
        </property>
@@ -122,6 +119,74 @@
          </property>
          <property name="text">
           <string>Solve</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="wg_algorithm" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,0">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>100</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>100</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignRight">
+        <widget class="QLabel" name="lb_preprocesing">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Preprocess:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cbb_preprocessing">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>Do not preprocessing</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Remove large weight items</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Remove low price items</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Remove range of low price items</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_newSize">
+         <property name="text">
+          <string>New size: 0</string>
          </property>
         </widget>
        </item>
@@ -493,7 +558,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1000</width>
      <height>22</height>
     </rect>
    </property>

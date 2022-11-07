@@ -9,6 +9,7 @@ from UIDesign.Utility import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import Algorithms.Algorithm as algorithms
+from DataPreprocessing.DataPreprocessing import Preprocessing
 
 
 class GUI(Ui_mainwindow):
@@ -114,6 +115,19 @@ class GUI(Ui_mainwindow):
                     raise Exception("Can not find the algorithm!")
 
             t1 = time()
+            match self.cbb_preprocessing.currentText():
+                case "Remove large weight items":
+                    (W, P) = Preprocessing.removeLargeWeight(C, W, P)
+                case "Remove low price items":
+                    (W, P) = Preprocessing.removeSmallPrice(C, W, P)
+                case "Remove range of low price items":
+                    (W, P) = Preprocessing.removeSmallRangePrice(C, W, P)
+                case _:
+                    pass
+            
+            # Display new number of items
+            self.lb_newSize.setText("New size: {}".format(len(W)))
+
             indexes = algorithm.findSolution(C, W, P)
             t2 = time()
 
@@ -263,11 +277,3 @@ class GUI(Ui_mainwindow):
         '''
         self.cbb_algorithm.showPopup()
         self.cbb_algorithm.setFocus()
-
-# # Run GUI app
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     ui = GUI()
-#     ui.show()
-#     sys.exit(app.exec_())
