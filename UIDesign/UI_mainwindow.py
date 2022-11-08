@@ -363,7 +363,6 @@ class Ui_mainwindow(object):
         self.actionUserGuide.setShortcut(_translate("mainwindow", "F1"))
         self.actionKnapsackReport.setText(_translate("mainwindow", "Knapsack report"))
         self.actionKnapsackReport.setShortcut(_translate("mainwindow", "F2"))
-import resource_rc
 
 
 if __name__ == "__main__":
