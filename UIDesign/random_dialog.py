@@ -62,7 +62,7 @@ class Ui_dgRandom(object):
         self.horizontalLayout_2.addWidget(self.lb_count)
         self.spb_count = QtWidgets.QSpinBox(self.wg_count)
         self.spb_count.setEnabled(True)
-        self.spb_count.setMaximum(1000)
+        self.spb_count.setMaximum(10000)
         self.spb_count.setProperty("value", 100)
         self.spb_count.setObjectName("spb_count")
         self.horizontalLayout_2.addWidget(self.spb_count)
