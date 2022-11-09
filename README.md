@@ -56,7 +56,7 @@ Based on the observation of the data we preprocess the input data. Following bel
 
 Below is flowchart for method 2:
 
-![img](./Flowcharts/data_preprocessing.png)
+![img](./Images/data_preprocessing.png)
 
 **Time Complexity:** O(n.log(n))
 
@@ -75,6 +75,10 @@ Many techniques have been developed to find the optimal solution to the knapsack
 - Dynamic programming
 - Greedy 
 - Branch and bound
+
+The flowchart for our algorithm:
+
+![img](./Images/main.png)
 
 ## 1.	Brute Force
 
@@ -95,7 +99,7 @@ If the weight of ‘nth’ item is greater than ‘C’, then the nth item canno
 
 **Flowchart:**
 
-![img](./Flowcharts/bruteforce.png)
+![img](./Images/brute_force.png)
 
 **Complexity Analysis:**
 
@@ -103,7 +107,7 @@ If the weight of ‘nth’ item is greater than ‘C’, then the nth item canno
 
 Each node of the recursion tree contains 2 children: choose and not choose the next item, we must consider all leaf nodes of the recursion tree with a height equal to n. Therefore, the time complexity of the Brute Force algorithm is O(2^n).
 
-![img](./Flowcharts/BruteForceDemo.png)
+![img](./Images/brute_force_demo.png)
 
 *Auxiliary Space:* O(n).
 
@@ -117,11 +121,11 @@ Meet in the middle is a search technique that is used when the number of items i
 - Compute the weights and prices of all subsets of each set
 - For each subset of A, find the subset of B of greatest price such that the combined weight is less than C. Keep track of the greatest combined price seen so far.
 
-![img](./Flowcharts/MITM_demo.png)
+![img](./Images/meet_in_the_middle_demo.png)
 
 **Flowchart:**
 
-![img](./Flowcharts/meet-in-the-middle.png)
+![img](./Images/meet_in_the_middle.png)
 
 **Complexity Analysis:**
 
@@ -143,7 +147,13 @@ This method uses the Brute Force algorithm with the Memorization Technique. It i
 
 **Flowchart:**
 
-![img](./Flowcharts/bruteforce_memorization.png)
+*main function*
+
+![img](./Images/bruteforce_memorization.png)
+
+*memorization function*
+
+![img](./Images/memorization_function.png)
 
 **Complexity Analysis:**
 
@@ -167,7 +177,7 @@ The state DP[i][j] will denote the maximum price of ‘j-weight’ considering a
 
 **Flowchart:**
 
-![img](./Flowcharts/dynamicprograming.png)
+![img](./Images/dynamic_programing.png)
 
 **Complexity Analysis:**
 
@@ -195,7 +205,7 @@ We implemented and tested all three of the strategies. We got the best results w
 Below is the flowchart for Greedy algorithm implementation.
 
 **Flowchart:**
-![img](./Flowcharts/greedy.png)
+![img](./Images/greedy.png)
 
 **Complexity Analysis:**
 
@@ -266,10 +276,10 @@ Initializing a state space tree costs a lot. To save more money on the problem o
 **Flowchart:**
 
 *getBound function*
-![img](./Flowcharts/getBound.png)
+![img](./Images/get_bound.png)
 
 *main function*
-![img](./Flowcharts/BranchAndBound.png)
+![img](./Images/branch_and_bound.png)
 
 **Complexity Analysis**
 
@@ -290,7 +300,7 @@ For the testing of the different algorithms, we create two different datasets to
 
 **Table 1**
 
-![img](./Testing/Table1.png)
+![img](./Images/table1.png)
 
 - Algorithms with exponential complexity (Brute Force, Meet in the middle, Brand and Bound) will limit the number of items. The number of operations will be extremely large to handle as the number of items increases to perform the calculation of all cases. Overall, Meet in the middle has improved runtime compared to brute force. Brand and bounds by adding constraints (upper bound) to limit having to traverse the entire state space tree allow processing more items, and also demonstrates a speed improvement. 
 
@@ -300,7 +310,7 @@ For the testing of the different algorithms, we create two different datasets to
 
 **Table 2**
 
-![img](./Testing/Table2.png)
+![img](./Images/table2.png)
 
 - In small capacity cases (using the number of items as a benchmark), dynamic programming will perform better than the rest of the algorithms, however, the efficiency will decrease as the knapsack capacity increases, because the time complexity of the recursion approach can be optimized to  O(n*C). Same case for Brute Force with memorization. The remaining algorithms have stable execution times because the complexity does not depend on the capacity.
 
@@ -310,13 +320,13 @@ For the testing of the different algorithms, we create two different datasets to
 
 **Table 3:** C=200, n=100, Wmax= 300
 
-![img](./Testing/Table3.png)
+![img](./Images/table3.png)
 
 - In Table 3, all 3 methods reduce the size of the problem, thereby reducing the execution time significantly. The final result is still guaranteed to be the optimal result when removing large-weight and low-price items. Depending on the data, different data density distributions will give different efficiency.
 
 **Table 4:** C=100, n=50, Wmax= 150
 
-![img](./Testing/Table4.png)
+![img](./Images/table4.png)
 
 - In certain cases, the value of the result is not the optimal solution. However, this is still an approximation worth considering. This trade-off provides a short processing time and a result close to the optimal solution.
 
@@ -331,6 +341,38 @@ For the testing of the different algorithms, we create two different datasets to
 - Data preprocessing gives a good improvement to solving algorithms 01 knapsack problems. With the data observation and the allowed error, the selection of suitable data processing methods will give a highly applicable solution.
 
 # VII. KNAPSACK SOLVING TOOL
+
+*The tool is developed by our team to solve Knapsack Problem.*
+
+In above flowcharts we only find the maximum price of items, but in this tool we display all items and an optimal solution. (View code in folder [Algorithms](./Algorithms/))
+
+To run this tool, run the following commands:
+
+        pip install -r requirement.txt
+
+The above command will install the libraries for GUI and data analysis.
+
+Then run:
+
+        python main.py
+
+The new window will show:
+
+![img](./Images/knapsack_solving_tool.png)
+
+This is the User Manual of this tool.
+
+Following below step to solve a Knapsack Problem:
+
+- Add weight and price of items. You can add manual or random using our tool.
+- Input capacity of the knapsack.
+- Select the algorithm.
+- Choose data preprocessing or not.
+- Click 'solve' button and wait for the result in the output table.
+
+The result will like below:
+
+![img](./Images/knapsack_solving_tool_result.png)
 
 # VIII.	REFERENCES
 
