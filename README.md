@@ -166,7 +166,7 @@ The use of 2D array data structure for storing intermediate states and O(n) auxi
 
 ## 4.	Dynamic Programming
 
-Dynamic Programming is a technique for solving problems whose solutions satisfy recurrence relations with overlapping subproblems. Dynamic Programming solves each of the smaller subproblems only once and records the results in a table rather than solving overlapping subproblems over and over again. The table is then used to obtain a solution to the original problem. The classical dynamic programming approach works bottom-up [1](#viiireferences).
+Dynamic Programming is a technique for solving problems whose solutions satisfy recurrence relations with overlapping subproblems. Dynamic Programming solves each of the smaller subproblems only once and records the results in a table rather than solving overlapping subproblems over and over again. The table is then used to obtain a solution to the original problem. The classical dynamic programming approach works bottom-up [[1]](#viiireferences).
 
 To design a dynamic programming algorithm for the 0/1 Knapsack problem, we first need to create a DP[][] table then consider all the possible weights from ‘1’ to ‘C’ as the columns and weights that can be kept as the rows. 
 
@@ -192,7 +192,7 @@ Because we used 2-D array of size n*C to contain values in the table.
 
 ## 5.	Greedy
 
-Greedy programming techniques are used in optimization problems. A greedy algorithm makes a locally optimal choice in the hope that this will lead to a globally optimal solution. Clearly, greedy algorithms do not always yield the optimal solution [2](#viiireferences).
+Greedy programming techniques are used in optimization problems. A greedy algorithm makes a locally optimal choice in the hope that this will lead to a globally optimal solution. Clearly, greedy algorithms do not always yield the optimal solution [[2]](#viiireferences).
 
 Possible greedy strategies to the 0/1 Knapsack problem: 
 
@@ -229,7 +229,7 @@ In above flowchart, we store sorted items in the input arrays. Hence, the comple
 
 Branch and bound is a technique used only to solve optimization problems. It is based on the construction of a ‘state space tree’. a state space tree is a rooted tree where each level represents a choice in the solution set (In the context of the 0-1 Knapsack problem, it is chosen or not chosen) and depends on the upper bound. Any possible solution is represented by a path from the root node to the leaf node. The root node represents no optimal solution.
 
-In general, we terminate a search path at the current node in a state-space tree of a branch-and-bound algorithm for any one of the following three reasons [1](#viiireferences): 
+In general, we terminate a search path at the current node in a state-space tree of a branch-and-bound algorithm for any one of the following three reasons [[1]](#viiireferences): 
 
 - The price of the node’s bound is not better than the price of the best solution seen so far. 
 
@@ -330,17 +330,7 @@ For the testing of the different algorithms, we create two different datasets to
 
 - In certain cases, the value of the result is not the optimal solution. However, this is still an approximation worth considering. This trade-off provides a short processing time and a result close to the optimal solution.
 
-# VI.	CONCLUSION
-
-- Comparative research between strategies (Brute Force and variants thereof, Greed, Dynamic programming, Brand and Bound) shows that despite the complexity of these algorithms being known, the nature of the problem they are applied to makes some of them more suitable than others.
-
-- The best approximation for the 0/1 knapsack problem is dynamic programming. Although the algorithm depends on the number of items and the capacity of the knapsack, it will have difficulty in cases where the two parameters are too large. Dynamic programming is still recommended because these algorithms are easily programmed and understood by the user. 
-
-- Although the Greedy algorithm does not give the optimal solution, it returns a good approximation solution for the Knapsack Problem with small time complexity. In the case we do not need absolute solutions, the Greedy algorithm should be considered.
-
-- Data preprocessing gives a good improvement to solving algorithms 01 knapsack problems. With the data observation and the allowed error, the selection of suitable data processing methods will give a highly applicable solution.
-
-# VII. KNAPSACK SOLVING TOOL
+# VI. KNAPSACK SOLVING TOOL
 
 *The tool is developed by our team to solve Knapsack Problem.*
 
@@ -360,7 +350,7 @@ The new window will show:
 
 ![img](./Images/knapsack_solving_tool.png)
 
-This is the User Manual of this tool.
+There is the User Manual of this tool.
 
 Following below step to solve a Knapsack Problem:
 
@@ -374,8 +364,27 @@ The result will like below:
 
 ![img](./Images/knapsack_solving_tool_result.png)
 
+# VII.	CONCLUSION
+
+- Comparative research between strategies (Brute Force and variants thereof, Greed, Dynamic programming, Brand and Bound) shows that despite the complexity of these algorithms being known, the nature of the problem they are applied to makes some of them more suitable than others.
+
+- The best approximation for the 0/1 knapsack problem is dynamic programming. Although the algorithm depends on the number of items and the capacity of the knapsack, it will have difficulty in cases where the two parameters are too large. Dynamic programming is still recommended because these algorithms are easily programmed and understood by the user. 
+
+- Although the Greedy algorithm does not give the optimal solution, it returns a good approximation solution for the Knapsack Problem with small time complexity. In the case we do not need absolute solutions, the Greedy algorithm should be considered.
+
+- Data preprocessing gives a good improvement to solving algorithms 01 knapsack problems. With the data observation and the allowed error, the selection of suitable data processing methods will give a highly applicable solution.
+
 # VIII.	REFERENCES
 
 1.  Levitin, Anany. The Design and Analysis of Algorithms. New Jersey: Pearson Education Inc., 2003. 
 
 2.  Vince, Andrew. "A framework for the greedy algorithm." Discrete Applied Mathematics 121.1-3 (2002): 247-260.
+
+# CONTRIBUTORS
+
+We are group 1 of Data structures and Algorithms course. Our team includes:
+- **Tra Nguyen Huu Nghia** (leader)
+- **Lieu Bach Thanh** (sub-leader)
+- **Nguyen Huynh Lam** (member)
+- **Pham Tan Hung** (member)
+- **Luu Kim Tung** (member)
