@@ -1,46 +1,29 @@
-# [Data Structures and Algorithms course] Knapsack Problem
+# Knapsack Problem Report
 
 # I.	INTRODUCTION
 
 One of the classic combinatorial optimization problems is the knapsack problem which finds many applications in the computing domain. From a given set of items (each with a weight and a value), the objective is to find the number of items that can be included so that the total weight is less than or equal to a given limit and also the total value is the maximum. The Knapsack problem has been studied for more than a century, with early works dating as far back as 1897. The name "Knapsack problem" dates back to the early works of the mathematician Tobias Dantzig (1884–1956) and refers to the commonplace problem of packing the most valuable or useful items without overloading the luggage.
 
-## 1.	Applications
+## Applications
 
 The knapsack problems have a variety of real-life applications including financial modeling, production and inventory management systems, stratified sampling, design of queuing network models in manufacturing, and control of traffic overload in telecommunication systems. Other areas of applications include yield management for airlines, hotels, and rental agencies, college admissions, quality adaptation and admission control for interactive multimedia systems, cargo loading, capital budgeting, cutting stock problems, and computer processing allocations in huge distributed systems.
 
-## 2.	Research Objectives
-
-We consider a generalization of the 0-1 knapsack problem. We mention some basic and advanced algorithmic ideas: Brute force, Meet in the middle, Memorization, Dynamic programming, Greedy, and Branch and Bound. For each formulation, we design an efficient program to compute and compare the strength-derived specific results for each algorithm. 
-
 # II.	PROBLEM DEFINITION
 
-The knapsack problem is an optimization problem used to illustrate both problem and the solution. It derives its name from a scenario where one is constrained in the number of items that can be placed inside a fixed-size knapsack. Given a set of n items with specific weights W[] and values P[], the aim is to get as much value into the knapsack as possible given the capacity C of the knapsack. In addition, there are Qi copies of item i available, where quantity Qi is a positive integer satisfying 1  Qi  . If Qi = 1 for i = 1, 2, …, n, the problem is a 0-1 knapsack problem.
-The binary decision variables xi, with xi = 1 if item i is selected, and xi = 0 otherwise. The goal is to:
-Maximize			i=1NPi.xi
-Subject to the constraints	i=1NWi.xiC		And	 xi  {0, 1}
+The knapsack problem is an optimization problem used to illustrate both problem and the solution. It derives its name from a scenario where one is constrained in the number of items that can be placed inside a fixed-size knapsack. 
+
+Given a set of n items with specific weights W[] and values P[], the aim is to get as much value into the knapsack as possible given the capacity C of the knapsack. 
+
 Input and output description
 Standardize the problem with the function Knapsack(C, n, W, P) form for the whole algorithm.
-Input
 
-
-Data type
-Description
-C
-Integer
-Capacity of knapsack
-n
-Integer
-Number of items
-W
-Array of integer
-Weight associated with each item
-P
-Array of integer
-Price associated with each item
-Output
-result
-Array of integer
-list of items that have the total maximum price can be contained in the knapsack
+|        |Label   | Data type        | Descriptions                                                                     |
+|--------|--------|------------------|----------------------------------------------------------------------------------|
+| Input  | C      | Integer          | Capacity of knapsack                                                             |
+|        | n      | Integer          | Number of items                                                                  |
+|        | W      | Array of integer | Weight associated with each item                                                 |
+|        | P      | Array of integer | Price associated with each item                                                  |
+| Output | result | Array of integer | List of items that have the total maximum price can be contained in the knapsack |
 
 
 ***Note:*** The output of the algorithms in this study will be an integer describing the maximum price that can be contained in the knapsack, the purpose is to simplify the algorithms for simple description and help easier for readers to understand.
@@ -48,6 +31,7 @@ list of items that have the total maximum price can be contained in the knapsack
 # III.	DATA PREPROCESSING
 
 ## 1.	Data Observation
+
 - Easy to observe: the items having a weight greater than capacity need to be removed first to reduce the number of calculations. These items will not be the optimal solution because they do not satisfy the constraints of the knapsack problem.
 
 - Items with weight Wi appear only up to x = floor(C / Wi) times. So in the optimal solution, there can only be at most x items of mass wi. In the preprocessing step we will choose x items with the weight wi and price pi such that the sum of pi is maximum.
@@ -55,11 +39,13 @@ list of items that have the total maximum price can be contained in the knapsack
 - More broadly, items with the same weight often have roughly the same value, so instead of considering items of weight wi we consider all items of weight in Wj such that C / Wj = C / Wi = x (x > 0). Similarly, we also choose only x items with the largest value.
 
 ## 2.	Discussion
+
 - Handling (i), (ii) always ensures that the solution found is optimal and reduces the size of the problem in many cases.
 
 - Process (iii) will also reduce more size of the problem more than (ii), but the problem result may not be optimal. Approximately, the solution will be close to the optimal solution, so our report will use this method for preprocessing data.
 
 ## 3.	Data preprocessing
+
 Based on the observation of the data we preprocess the input data. Following below steps:
 
 - Sort items in ascending order based on the value a = Wi - Pi / (max(P) + 1). We can guarantee that items with the same Wi will be sorted in ascending order, while items with the same weight will also be sorted in descending order based on their price.
@@ -69,6 +55,8 @@ Based on the observation of the data we preprocess the input data. Following bel
 - Method 2: For each item has the weight wi and another has the weight Wj satisfying C / Wj = C / Wi = x, only the x item with the highest value is kept. Accepting errors in this method.
 
 Below is flowchart for method 2:
+
+![img](./Flowcharts/data_preprocessing.png)
 
 **Time Complexity:** O(n.log(n))
 
@@ -107,13 +95,17 @@ If the weight of ‘nth’ item is greater than ‘C’, then the nth item canno
 
 **Flowchart:**
 
+![img](./Flowcharts/bruteforce.png)
+
 **Complexity Analysis:**
 
-***Time Complexity:*** O(2^n).
+*Time Complexity:* O(2^n).
 
 Each node of the recursion tree contains 2 children: choose and not choose the next item, we must consider all leaf nodes of the recursion tree with a height equal to n. Therefore, the time complexity of the Brute Force algorithm is O(2^n).
 
-***Auxiliary Space:*** O(n).
+![img](./Flowcharts/BruteForceDemo.png)
+
+*Auxiliary Space:* O(n).
 
 Because no extra data structure has been used for storing values but maximum O(n) auxiliary stack space(ASS) has been used for recursion stack.
 
@@ -125,21 +117,23 @@ Meet in the middle is a search technique that is used when the number of items i
 - Compute the weights and prices of all subsets of each set
 - For each subset of A, find the subset of B of greatest price such that the combined weight is less than C. Keep track of the greatest combined price seen so far.
 
+![img](./Flowcharts/MITM_demo.png)
 
 **Flowchart:**
 
+![img](./Flowcharts/meet-in-the-middle.png)
 
 **Complexity Analysis:**
 
-***Time Complexity:*** O(n.2^(n/2)).
+*Time Complexity:* O(n.2^(n/2)).
 
-Simply iterate over all elements of array Y for each element of array X to check the existence of such a combination. This will take O( (2n/2)2) which is equivalent to O(2n). To make it less complex, first sort array Y and then iterate over each element of X and for each element x in X use binary search to find maximum element y in Y such that x + y <= S.
+Simply iterate over all elements of array Y for each element of array X to check the existence of such a combination. This will take O((2^(n/2))^2) which is equivalent to O(2^n). To make it less complex, first sort array Y and then iterate over each element of X and for each element x in X use binary search to find maximum element y in Y such that x + y <= S.
 
-Binary search here helps in reducing complexity from 2n to 2n/2.log(2n/2) which is equivalent to n.2n/2.
+Binary search here helps in reducing complexity from 2^n to 2^(n/2).log(2^(n/2)) which is equivalent to n.2^(n/2).
 
-***Auxiliary Space:*** O(2^(n/2)).
+*Auxiliary Space:* O(2^(n/2)).
 
-Because we use 4.2n/2 for contains all possible subsets of halves of the weight set (XW, YW) and price set (XP, YP). 
+Because we use 4.2^(n/2) for contains all possible subsets of halves of the weight set (XW, YW) and price set (XP, YP). 
 
 In real-life implementation, we need an extremely large space to contain all possible items of all possible subsets. Therefore, in this report, we use this algorithm for comparing time complexity to other algorithms. The Meet in the middle algorithm is not used to find optimal items in real life.
 
@@ -149,33 +143,39 @@ This method uses the Brute Force algorithm with the Memorization Technique. It i
 
 **Flowchart:**
 
+![img](./Flowcharts/bruteforce_memorization.png)
 
 **Complexity Analysis:**
 
-***Time Complexity:*** O(n*C).
+*Time Complexity:* O(n*C).
 
 Each node (n, C) in the recursion tree is calculated maximum once. Hence, the maximum calculations for all nodes are n*C.  The redundant calculations of states are avoided, so the time complexity is O(n*C). 
 
-***Auxiliary Space:*** O(n*C) + O(n). 
+*Auxiliary Space:* O(n*C) + O(n). 
 The use of 2D array data structure for storing intermediate states and O(n) auxiliary stack space(ASS) has been used for recursion stack.
 
 ## 4.	Dynamic Programming
 
 Dynamic Programming is a technique for solving problems whose solutions satisfy recurrence relations with overlapping subproblems. Dynamic Programming solves each of the smaller subproblems only once and records the results in a table rather than solving overlapping subproblems over and over again. The table is then used to obtain a solution to the original problem. The classical dynamic programming approach works bottom-up [1].
+
 To design a dynamic programming algorithm for the 0/1 Knapsack problem, we first need to create a DP[][] table then consider all the possible weights from ‘1’ to ‘C’ as the columns and weights that can be kept as the rows. 
+
 The state DP[i][j] will denote the maximum price of ‘j-weight’ considering all items from ‘1 to ith’. So if we consider ‘Wi’ (weight in ‘ith’ row) we can fill it in all columns which have ‘weight > Wi’. Now two possibilities can take place: 
-Fill ‘Wi’ in the given column.
-Do not fill ‘Wi’ in the given column.
+
+- Fill ‘Wi’ in the given column.
+- Do not fill ‘Wi’ in the given column.
 
 **Flowchart:**
 
+![img](./Flowcharts/dynamicprograming.png)
+
 **Complexity Analysis:**
 
-***Time Complexity:*** O(n*C).
+*Time Complexity:* O(n*C).
 
 As for every weight element we traverse through all weight capacities 1<=w<=C. 
 
-***Auxiliary Space:*** O(n*C).
+*Auxiliary Space:* O(n*C).
 
 
 Because we used 2-D array of size n*C to contain values in the table.
@@ -195,10 +195,11 @@ We implemented and tested all three of the strategies. We got the best results w
 Below is the flowchart for Greedy algorithm implementation.
 
 **Flowchart:**
+![img](./Flowcharts/greedy.png)
 
 **Complexity Analysis:**
 
-***Time Complexity:*** O(n.log(n))
+*Time Complexity:* O(n.log(n))
 
 The time complexity for sorting by any advanced algorithm (like Quick sort, Merge sort,...) is O(n.log(n)) 
 
@@ -206,7 +207,7 @@ The complexity for selecting items by traversing all of them is O(n).
 
 The total time complexity of the greedy algorithm is O(n.log(n)) + O(n)  O(n.log(n)). 
 
-***Auxiliary Space:*** O(1).
+*Auxiliary Space:* O(1).
 
 Storing sorted weights and prices in the input arrays: the complexity is O(1). 
 
@@ -220,52 +221,66 @@ Branch and bound is a technique used only to solve optimization problems. It is 
 
 In general, we terminate a search path at the current node in a state-space tree of a branch-and-bound algorithm for any one of the following three reasons [1]: 
 
-The price of the node’s bound is not better than the price of the best solution seen so far. 
+- The price of the node’s bound is not better than the price of the best solution seen so far. 
 
-The node represents no feasible solutions because the constraints of the problem are already violated. 
+- The node represents no feasible solutions because the constraints of the problem are already violated. 
 
-The subset of feasible solutions represented by the node consists of a single point (and hence no further choices can be made)—in this case, we compare the price of the objective function for this feasible solution with that of the best solution seen so far and update the latter with the former if the new solution is better.
+- The subset of feasible solutions represented by the node consists of a single point (and hence no further choices can be made)—in this case, we compare the price of the objective function for this feasible solution with that of the best solution seen so far and update the latter with the former if the new solution is better.
 
 In the state space tree, a branch going to the left indicates the inclusion of the next item while a branch to the right indicates its exclusion.
 
 In each node of the state space tree, we record the following information:
-level
-indicates which level is the node at
-cumValue
-the cumulative price of all items that have been selected on this branch
-cumWeight
-the cumulative weight of all items that have been selected on this branch
-nodeBound
-Upper bound of maximum profit in subtree of this node
+
+| Attribute | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+| level     | indicates which level is the node at                                      |
+| cumValue  | the cumulative price of all items that have been selected on this branch  |
+| cumWeight | the cumulative weight of all items that have been selected on this branch |
+| nodeBound | Upper bound of maximum profit in subtree of this node                     |
 
 
 We may determine the upper bound by adding the cumulative value of the items already selected in the subset, and the product of the knapsack's remaining capacity and the best per-unit payoff among the remaining items, which is Pi+1 / Wi+1.
-Upper Bound= P + (C-W).(Pi+1/Wi+1)
+
+        Upper Bound= P + (C-W).(P(i+1)/W(i+1))
+
 Initializing a state space tree costs a lot. To save more money on the problem of finding the maximum price, we use a queue to store the nodes. Step for solving Knapsack problem using Branch and Bound algorithm:
-Sort all items in decreasing order of ratio of price per unit weight so that an upper bound can be computed using Greedy Approach.
-Initialize maximum profit, maxProfit = 0
-Create an empty queue, Q.
-Create a dummy node of the decision tree and enqueue it to Q. Profit and weight of the dummy node are 0.
-Do following while Q is not empty.
-Extract an item from Q. Let the extracted item be u.
-Compute profit of next level node. If the profit is more than maxProfit, then update maxProfit.
-Compute bound of next level node. If bound is more than maxProfit, then add the next level node to Q.
-Consider the case when the next level node is not considered as part of the solution and add a node to queue with level as next, but weight and profit without considering next level nodes.
+
+1. Sort all items in decreasing order of ratio of price per unit weight so that an upper bound can be computed using Greedy Approach.
+
+2. Initialize maximum profit, maxProfit = 0
+
+3. Create an empty queue, Q.
+
+4. Create a dummy node of the decision tree and enqueue it to Q. Profit and weight of the dummy node are 0.
+
+5. Do following while Q is not empty.
+
+    + Extract an item from Q. Let the extracted item be u.
+
+    + Compute profit of next level node. If the profit is more than maxProfit, then update maxProfit.
+
+    + Compute bound of next level node. If bound is more than maxProfit, then add the next level node to Q.
+
+    + Consider the case when the next level node is not considered as part of the solution and add a node to queue with level as next, but weight and profit without considering next level nodes.
 
 **Flowchart:**
 
+*getBound function*
+![img](./Flowcharts/getBound.png)
 
+*main function*
+![img](./Flowcharts/BranchAndBound.png)
 
 **Complexity Analysis**
 
-***Time Complexity:***
+*Time Complexity:*
 
-- Worst case: O(2n)
+- Worst case: O(2^n)
 - Best case: O(n)
 
 In the worst case, time complexity is still given by O(2n) in cases where the entire tree has to be explored. However, in its best case, only one path through the tree will have to be explored, and hence its best case time complexity is given by O(n). Since this method requires the creation of the state space tree, its complexity will be exponential.
 
-***Auxiliary Space:*** The required memory depends on the length of the priority queue.
+*Auxiliary Space:* The required memory depends on the length of the priority queue.
 
 # V.	RESULTS AND DISCUSSION 
 
@@ -273,27 +288,37 @@ For the testing of the different algorithms, we create two different datasets to
 
 ***Testing I: Increase the number of items & Capacity = 1000***
 
-Table 1
+**Table 1**
 
-Algorithms with exponential complexity (Brute Force, Meet in the middle, Brand and Bound) will limit the number of items. The number of operations will be extremely large to handle as the number of items increases to perform the calculation of all cases. Overall, Meet in the middle has improved runtime compared to brute force. Brand and bounds by adding constraints (upper bound) to limit having to traverse the entire state space tree allow processing more items, and also demonstrates a speed improvement. 
-The greedy algorithm has the fastest running time among the considered algorithms. This is because the complexity depends on the step of sorting the items according to certain criteria. However, the greedy results in many cases do not match the optimal results when performing Brute force. This is a trade-off between the accuracy of the results and the execution time.
+![img](./Testing/Table1.png)
+
+- Algorithms with exponential complexity (Brute Force, Meet in the middle, Brand and Bound) will limit the number of items. The number of operations will be extremely large to handle as the number of items increases to perform the calculation of all cases. Overall, Meet in the middle has improved runtime compared to brute force. Brand and bounds by adding constraints (upper bound) to limit having to traverse the entire state space tree allow processing more items, and also demonstrates a speed improvement. 
+
+- The greedy algorithm has the fastest running time among the considered algorithms. This is because the complexity depends on the step of sorting the items according to certain criteria. However, the greedy results in many cases do not match the optimal results when performing Brute force. This is a trade-off between the accuracy of the results and the execution time.
 
 ***Testing II: Increase the capacity & Number of Items = 20***
 
-Table 2
+**Table 2**
 
-In small capacity cases (using the number of items as a benchmark), dynamic programming will perform better than the rest of the algorithms, however, the efficiency will decrease as the knapsack capacity increases, because the time complexity of the recursion approach can be optimized to  O(n*C). Same case for Brute Force with memorization. The remaining algorithms have stable execution times because the complexity does not depend on the capacity.
+![img](./Testing/Table2.png)
+
+- In small capacity cases (using the number of items as a benchmark), dynamic programming will perform better than the rest of the algorithms, however, the efficiency will decrease as the knapsack capacity increases, because the time complexity of the recursion approach can be optimized to  O(n*C). Same case for Brute Force with memorization. The remaining algorithms have stable execution times because the complexity does not depend on the capacity.
 
 ***Testing with preprocessed data***
 
-Data preprocessing helps to reduce the size of the problem significantly compared to the original size. We will test the Brute Force algorithm (the algorithm that complexity is strongly influenced by the number of items) to test the improvement in time and efficiency when performing data preprocessing.
+- Data preprocessing helps to reduce the size of the problem significantly compared to the original size. We will test the Brute Force algorithm (the algorithm that complexity is strongly influenced by the number of items) to test the improvement in time and efficiency when performing data preprocessing.
 
-Table 3: C=200, n=100, Wmax= 300
+**Table 3:** C=200, n=100, Wmax= 300
 
-In Table 3, all 3 methods reduce the size of the problem, thereby reducing the execution time significantly. The final result is still guaranteed to be the optimal result when removing large-weight and low-price items. Depending on the data, different data density distributions will give different efficiency.
+![img](./Testing/Table3.png)
 
-Table 4: C=100, n=50, Wmax= 150
-In certain cases, the value of the result is not the optimal solution. However, this is still an approximation worth considering. This trade-off provides a short processing time and a result close to the optimal solution.
+- In Table 3, all 3 methods reduce the size of the problem, thereby reducing the execution time significantly. The final result is still guaranteed to be the optimal result when removing large-weight and low-price items. Depending on the data, different data density distributions will give different efficiency.
+
+**Table 4:** C=100, n=50, Wmax= 150
+
+![img](./Testing/Table4.png)
+
+- In certain cases, the value of the result is not the optimal solution. However, this is still an approximation worth considering. This trade-off provides a short processing time and a result close to the optimal solution.
 
 # VI.	CONCLUSION
 
@@ -311,6 +336,3 @@ In certain cases, the value of the result is not the optimal solution. However, 
 
 [1]  Levitin, Anany. The Design and Analysis of Algorithms. New Jersey: Pearson Education Inc., 2003. 
 [2]  Vince, Andrew. "A framework for the greedy algorithm." Discrete Applied Mathematics 121.1-3 (2002): 247-260.
-
-
-
